@@ -6,17 +6,13 @@
     </div>
 
     <div class="versions">
-      <!-- Kinder-Version -->
-      <router-link to="/kids" class="kids-version">
-        <h3>Kinder</h3>
-        <p>Beschreibung der Version für Kinder</p>
-      </router-link>
+      <div class="fluency-shaping">
+        <h3>Fluency Shaping</h3>
+      </div>
 
-      <!-- Erwachsene-Version -->
-        <router-link to="/adults" class="adults-version">
-         <h3>Erwachsene</h3>
-         <p>Version für Erwachsene folgt bald</p>
-        </router-link>
+      <router-link to="/stutter-types" class="stutter-type">
+        <h3>Stotterart</h3>
+      </router-link>
     </div>
   </div>
 </template>
@@ -55,8 +51,8 @@ h2 {
   gap: 90px;
 }
 
-.kids-version,
-.adults-version {
+.fluency-shaping,
+.stutter-type {
   border: 2px solid #ccc;
   border-radius: 10px;
   padding: 20px;
@@ -71,8 +67,8 @@ h2 {
   text-decoration: none; /* wichtig für router-link */
   color: inherit; /* Schriftfarbe bleibt */
 }
-.kids-version:hover,
-.adults-version:hover {
+.fluency-shaping:hover,
+.stutter-type:hover {
   transform: translateY(-6px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-color: #0057a3;

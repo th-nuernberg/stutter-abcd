@@ -2,21 +2,27 @@
   <div class="starting-page">
     <div class="header">
       <h1>Stottertherapie</h1>
-      <h2>Wähle deine Version aus</h2>
+      <h2>Wähle die Stotterart aus</h2>
     </div>
 
-    <div class="versions">
-      <!-- Kinder-Version -->
-      <router-link to="/kids" class="kids-version">
-        <h3>Kinder</h3>
-        <p>Beschreibung der Version für Kinder</p>
+    <div class="stutter-types-choose">
+      <!-- Wiederholungen -->
+      <router-link to="/wiederholungen" class="stutter-card">
+        <h3>Wiederholungen</h3>
+        <p>Laute, Silben oder Wörter werden mehrfach wiederholt.</p>
       </router-link>
 
-      <!-- Erwachsene-Version -->
-        <router-link to="/adults" class="adults-version">
-         <h3>Erwachsene</h3>
-         <p>Version für Erwachsene folgt bald</p>
-        </router-link>
+      <!-- Teilweise Laute -->
+      <router-link to="/prolongation" class="stutter-card">
+        <h3>Prolongation</h3>
+        <p>Laute werden unvollständig oder abgebrochen ausgesprochen.</p>
+      </router-link>
+
+      <!-- Blockaden -->
+      <router-link to="/blockaden" class="stutter-card">
+        <h3>Blockaden</h3>
+        <p>Der Sprechfluss wird kurzzeitig blockiert, bevor der Laut entsteht.</p>
+      </router-link>
     </div>
   </div>
 </template>
@@ -48,31 +54,31 @@ h2 {
   color: black;
 }
 
-.versions {
+.stutter-types-choose {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   margin-top: 70px;
-  gap: 90px;
+  gap: 40px;
 }
 
-.kids-version,
-.adults-version {
+.stutter-card {
   border: 2px solid #ccc;
   border-radius: 10px;
-  padding: 20px;
-  width: 300px;
-  height: 220px;
+  padding: 25px;
+  width: 280px;
+  height: 200px;
   text-align: center;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-decoration: none; /* wichtig für router-link */
-  color: inherit; /* Schriftfarbe bleibt */
+  text-decoration: none;
+  color: inherit;
 }
-.kids-version:hover,
-.adults-version:hover {
+
+.stutter-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-color: #0057a3;

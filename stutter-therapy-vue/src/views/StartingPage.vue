@@ -13,10 +13,10 @@
       </router-link>
 
       <!-- Erwachsene-Version -->
-        <router-link to="/adults" class="adults-version">
-         <h3>Erwachsene</h3>
-         <p>Version für Erwachsene folgt bald</p>
-        </router-link>
+      <div class="adults-version">
+        <h3>Erwachsene</h3>
+        <p>Version für Erwachsene folgt bald</p>
+      </div>
     </div>
   </div>
 </template>
@@ -51,7 +51,7 @@ h2 {
 .versions {
   display: flex;
   justify-content: center;
-  margin-top: 70px;
+  margin-top: 50px;
   gap: 90px;
 }
 
@@ -61,7 +61,7 @@ h2 {
   border-radius: 10px;
   padding: 20px;
   width: 300px;
-  height: 220px;
+  height: 200px;
   text-align: center;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
