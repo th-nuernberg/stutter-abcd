@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stutter Therapy Analysis</title>
+  <style>
+    :root {
+      --primary-color: #0057a3;
+      --primary-light: #4a8bc8;
+      --secondary-color: #ff6b35;
+      --background-color: #f8f9fa;
+      --card-bg: #ffffff;
+      --text-dark: #2c3e50;
+      --text-light: #6c757d;
+      --border-color: #e0e0e0;
+      --note-color: #fff3cd;
+      --note-border: #ffc107;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background-color: var(--background-color);
+      margin: 0;
+      padding: 0;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      margin: 0 0 0.5rem;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .header-subtitle {
+      font-size: 1rem;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    h2 {
+      color: var(--primary-color);
+      border-bottom: 3px solid var(--primary-color);
+      padding-bottom: 0.5rem;
+      margin-top: 2rem;
+      font-weight: 600;
+    }
+
+    h3 {
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    pre {
+      background: var(--card-bg);
+      padding: 1.25rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      border-left: 4px solid var(--primary-color);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 1.5rem auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Filter-Leiste Styles */
+    .filter-bar {
+      background: var(--card-bg);
+      padding: 1.25rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      min-width: 150px;
+    }
+
+    .filter-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .filter-select {
+      padding: 0.6rem 0.8rem;
+      border: 2px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 0.85rem;
+      background: var(--card-bg);
+      transition: all 0.3s ease;
+    }
+
+    .filter-select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(0, 87, 163, 0.1);
+    }
+
+    .slider-container {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .slider-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      min-width: 200px;
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .slider-values {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+    }
+
+    .slider-value {
+      font-weight: 600;
+      color: var(--primary-color);
+      font-size: 0.8rem;
+      background: rgba(0, 87, 163, 0.1);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    /* Dual Range Slider Styles */
+    .dual-range-container {
+      position: relative;
+      height: 40px;
+      display: flex;
+      align-items: center;
+    }
+
+    .dual-range-track {
+      position: absolute;
+      height: 6px;
+      background: #e9ecef;
+      border-radius: 3px;
+      width: 100%;
+      z-index: 1;
+    }
+
+    .dual-range-progress {
+      position: absolute;
+      height: 6px;
+      background: var(--primary-color);
+      border-radius: 3px;
+      z-index: 2;
+    }
+
+    .dual-range-input {
+      position: absolute;
+      width: 100%;
+      height: 6px;
+      background: transparent;
+      pointer-events: none;
+      z-index: 3;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .dual-range-input::-webkit-slider-thumb {
+      pointer-events: all;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      cursor: pointer;
+      border: 2px solid white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      -webkit-appearance: none;
+    }
+
+    .dual-range-input::-moz-range-thumb {
+      pointer-events: all;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      cursor: pointer;
+      border: 2px solid white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .filter-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-left: auto;
+    }
+
+    .filter-button {
+      padding: 0.6rem 1.25rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .filter-apply {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .filter-reset {
+      background: var(--text-light);
+      color: white;
+    }
+
+    .filter-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .filter-apply:hover {
+      background: var(--primary-light);
+    }
+
+    .filter-reset:hover {
+      background: #5a6268;
+    }
+
+    /* Kachel-Grid */
+    .conversation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .conversation-tile {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 1.25rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-left: 4px solid var(--primary-color);
+      display: flex;
+      flex-direction: column;
+      height: fit-content;
+      position: relative;
+    }
+
+    .conversation-tile:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    }
+
+    .conversation-tile.active {
+      border-left-color: var(--secondary-color);
+      background: #f8fbff;
+    }
+
+    .conversation-tile.hidden {
+      display: none !important;
+    }
+
+    .conversation-tile:not(.hidden) {
+      display: block;
+    }
+
+    .conversation-tile h3 {
+      margin-top: 0;
+      color: var(--primary-color);
+      border-bottom: 1px solid #f0f0f0;
+      padding-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    /* DETAILS-KOMPONENTE - WICHTIG: Nimmt die gesamte Breite ein */
+    .conversation-details-container {
+      grid-column: 1 / -1;
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      margin: 1rem 0;
+      border: 1px solid var(--border-color);
+      display: none;
+      position: relative;
+      z-index: 5;
+      animation: slideDown 0.3s ease-out;
+    }
+
+    .conversation-details-container.active {
+      display: block;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .conversation-block {
+      margin-bottom: 1rem;
+      background: #f8fbff;
+      border-radius: 8px;
+      padding: 1rem;
+      border-left: 3px solid var(--primary-color);
+    }
+
+    .speaker {
+      font-weight: 600;
+      color: var(--text-dark);
+      font-size: 0.9rem;
+    }
+
+    .round {
+      color: var(--primary-color);
+      font-weight: 700;
+      font-size: 0.8rem;
+      background: rgba(0, 87, 163, 0.1);
+      padding: 0.25rem 0.6rem;
+      border-radius: 12px;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+
+    .section {
+      margin-bottom: 1.5rem;
+    }
+
+    .collapsible-section {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .collapsible-header {
+      background: #f8fbff;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .collapsible-header:hover {
+      background: #e3f2fd;
+    }
+
+    .collapsible-header h3 {
+      margin: 0;
+      color: var(--primary-color);
+      font-size: 1.2rem;
+    }
+
+    .collapsible-header.active {
+      background: var(--primary-color);
+      color: white;
+      border-bottom-color: var(--border-color);
+    }
+
+    .collapsible-header.active h3 {
+      color: white;
+    }
+
+    .collapsible-icon {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .collapsible-header.active .collapsible-icon {
+      transform: rotate(180deg);
+    }
+
+    .collapsible-content {
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .collapsible-content.active {
+      padding: 1.5rem;
+      max-height: none;
+    }
+
+    p {
+      margin: 0.4rem 0;
+      font-size: 0.9rem;
+    }
+
+    .stutter-indicator {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+
+    .stutter-true {
+      background-color: var(--secondary-color);
+    }
+
+    .stutter-false {
+      background-color: #28a745;
+    }
+
+    .back-button {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.25rem;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      background: var(--primary-light);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .stat-card {
+      background: #f8fbff;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      border: 1px solid #e3f2fd;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .message-content {
+      margin: 0.5rem 0;
+      padding: 0.75rem;
+      background: white;
+      border-radius: 6px;
+      border-left: 2px solid var(--border-color);
+      font-size: 0.85rem;
+    }
+
+    .stutter-details {
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+      background: #fff3e0;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      border-left: 2px solid #ffc107;
+    }
+
+    .stutter-detail-item {
+      margin: 0.25rem 0;
+      padding: 0.25rem 0.4rem;
+      background: white;
+      border-radius: 3px;
+      border: 1px solid #ffe0b2;
+    }
+
+    .prompts-preview {
+      margin-top: 0.75rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .prompt-item {
+      background: #f8f9fa;
+      border-radius: 6px;
+      padding: 0.6rem;
+      border-left: 3px solid var(--primary-color);
+      position: relative;
+      cursor: help;
+    }
+
+    .prompt-type {
+      font-weight: 600;
+      color: var(--primary-color);
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .prompt-text {
+      font-size: 0.75rem;
+      color: var(--text-dark);
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .prompt-item:hover .prompt-text {
+      -webkit-line-clamp: unset;
+      overflow: visible;
+      background: white;
+      padding: 0.5rem;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      position: relative;
+      z-index: 10;
+    }
+
+    .tile-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin: 0.75rem 0;
+    }
+
+    .tile-stat {
+      text-align: center;
+      padding: 0.5rem;
+      background: #f8fbff;
+      border-radius: 6px;
+      border: 1px solid #e3f2fd;
+    }
+
+    .tile-stat-value {
+      font-weight: 700;
+      color: var(--primary-color);
+      font-size: 1.1rem;
+    }
+
+    .tile-stat-label {
+      font-size: 0.7rem;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .tile-info {
+      font-size: 0.8rem;
+      margin: 0.3rem 0;
+    }
+
+    details {
+      margin-top: 0.5rem;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary-color);
+      font-size: 0.85rem;
+      padding: 0.4rem;
+      background: #f8f9fa;
+      border-radius: 4px;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-light);
+      font-style: italic;
+      grid-column: 1 / -1;
+      background: var(--card-bg);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    /* Notizen-Styles */
+    .note-section {
+      background: var(--note-color);
+      border: 2px solid var(--note-border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+
+    .note-textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 0.75rem;
+      border: 1px solid var(--note-border);
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      resize: vertical;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .note-textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(0, 87, 163, 0.1);
+    }
+
+    .note-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .note-button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .note-save {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .note-clear {
+      background: var(--text-light);
+      color: white;
+    }
+
+    .note-button:hover {
+      transform: translateY(-1px);
+    }
+
+    .note-preview {
+      margin-top: 0.75rem;
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 6px;
+      border-left: 3px solid var(--note-border);
+      font-size: 0.8rem;
+      max-height: 80px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .note-preview:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 20px;
+      background: linear-gradient(transparent, rgba(255, 243, 205, 0.8));
+    }
+
+    .note-preview.has-note {
+      max-height: none;
+      overflow: visible;
+    }
+
+    .note-preview.has-note:after {
+      display: none;
+    }
+
+    .note-indicator {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: var(--note-border);
+      color: var(--text-dark);
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: bold;
+    }
+
+    .note-filter {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-left: auto;
+    }
+
+    .note-filter-checkbox {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .slider-container {
+        flex-direction: column;
+      }
+      
+      .filter-actions {
+        margin-left: 0;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .conversation-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .container {
+        padding: 0 1rem;
+      }
+      
+      header {
+        padding: 1.25rem 1rem;
+      }
+      
+      h1 {
+        font-size: 1.6rem;
+      }
+      
+      .collapsible-header {
+        padding: 0.75rem 1rem;
+      }
+      
+      .collapsible-header h3 {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Stutter Therapy Analysis</h1>
+    <p class="header-subtitle">AI Conversation Analysis and Performance Metrics</p>
+  </header>
+
+  <div class="container">
+    <!-- Filter-Leiste -->
+    <div class="filter-bar">
+      <div class="filter-group">
+        <label class="filter-label">AI Modell</label>
+        <select class="filter-select" id="filter-model">
+          <option value="">Alle Modelle</option>
+        </select>
+      </div>
+      
+      <div class="filter-group">
+        <label class="filter-label">Quantisierung</label>
+        <select class="filter-select" id="filter-quantization">
+          <option value="">Alle</option>
+          <option value="true">Aktiviert</option>
+          <option value="false">Deaktiviert</option>
+        </select>
+      </div>
+      
+      <div class="slider-container">
+        <div class="slider-group">
+          <label class="filter-label">Stotterrate (%)</label>
+          <div class="slider-labels">
+            <span>0</span>
+            <span>100</span>
+          </div>
+          <div class="dual-range-container">
+            <div class="dual-range-track"></div>
+            <div class="dual-range-progress" id="stutter-rate-progress"></div>
+            <input type="range" min="0" max="100" value="0" class="dual-range-input" id="filter-stutter-rate-min">
+            <input type="range" min="0" max="100" value="100" class="dual-range-input" id="filter-stutter-rate-max">
+          </div>
+          <div class="slider-values">
+            <span class="slider-value" id="stutter-rate-min-value">Von: 0%</span>
+            <span class="slider-value" id="stutter-rate-max-value">Bis: 100%</span>
+          </div>
+        </div>
+        
+        <div class="slider-group">
+          <label class="filter-label">Stotter-Wahrscheinlichkeit</label>
+          <div class="slider-labels">
+            <span>0</span>
+            <span>1.0</span>
+          </div>
+          <div class="dual-range-container">
+            <div class="dual-range-track"></div>
+            <div class="dual-range-progress" id="stutter-prob-progress"></div>
+            <input type="range" min="0" max="1" step="0.01" value="0" class="dual-range-input" id="filter-stutter-prob-min">
+            <input type="range" min="0" max="1" step="0.01" value="1" class="dual-range-input" id="filter-stutter-prob-max">
+          </div>
+          <div class="slider-values">
+            <span class="slider-value" id="stutter-prob-min-value">Von: 0</span>
+            <span class="slider-value" id="stutter-prob-max-value">Bis: 1.0</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="note-filter">
+        <input type="checkbox" id="filter-notes" class="note-filter-checkbox">
+        <label class="filter-label" for="filter-notes">Nur mit Notizen</label>
+      </div>
+      
+      <div class="filter-actions">
+        <button class="filter-button filter-apply" onclick="applyFilters()">Filter anwenden</button>
+        <button class="filter-button filter-reset" onclick="resetFilters()">Zurücksetzen</button>
+      </div>
+    </div>
+
+    <div id="conversation-grid" class="conversation-grid"></div>
+  </div>
+
+  <script>
+    let conversationData = [];
+    let currentFilters = {};
+    let activeConversationIndex = null;
+
+    // Notizen aus localStorage laden
+    function loadNotes() {
+      const notes = localStorage.getItem('stutterAnalysisNotes');
+      return notes ? JSON.parse(notes) : {};
+    }
+
+    // Notizen in localStorage speichern
+    function saveNotes(notes) {
+      localStorage.setItem('stutterAnalysisNotes', JSON.stringify(notes));
+    }
+
+    // Notiz für eine bestimmte Konversation speichern
+    function saveNote(conversationId, note) {
+      const notes = loadNotes();
+      if (note.trim()) {
+        notes[conversationId] = note;
+      } else {
+        delete notes[conversationId];
+      }
+      saveNotes(notes);
+      updateNotePreview(conversationId);
+    }
+
+    // Notiz für eine bestimmte Konversation laden
+    function loadNote(conversationId) {
+      const notes = loadNotes();
+      return notes[conversationId] || '';
+    }
+
+    // Notiz-Vorschau in der Kachel aktualisieren
+    function updateNotePreview(conversationId) {
+      const note = loadNote(conversationId);
+      const previewElement = document.querySelector(`.conversation-tile[data-id="${conversationId}"] .note-preview`);
+      
+      if (previewElement) {
+        if (note) {
+          previewElement.textContent = note.length > 100 ? note.substring(0, 100) + '...' : note;
+          previewElement.classList.add('has-note');
+        } else {
+          previewElement.textContent = 'Klicken um Notiz hinzuzufügen...';
+          previewElement.classList.remove('has-note');
+        }
+      }
+    }
+
+    // JSON-Daten laden
+    fetch('complete_metadata_with_prompts.json')
+      .then(res => res.json())
+      .then(data => {
+        conversationData = data;
+        initializeFilters();
+        createConversationTiles();
+        setupDualRangeSliders();
+      })
+      .catch(err => {
+        console.error('Fehler beim Laden der JSON:', err);
+        document.getElementById('conversation-grid').innerHTML = 
+          '<p>Fehler beim Laden der Gesprächsdaten. Bitte stellen Sie sicher, dass die Datei "complete_metadata_with_prompts.json" verfügbar ist.</p>';
+      });
+
+    // Filter initialisieren
+    function initializeFilters() {
+      // Modelle für Filter sammeln
+      const models = [...new Set(conversationData.map(conv => conv.model_used))];
+      const modelSelect = document.getElementById('filter-model');
+      
+      models.forEach(model => {
+        const option = document.createElement('option');
+        option.value = model;
+        option.textContent = model;
+        modelSelect.appendChild(option);
+      });
+    }
+
+    // Dual-Range Slider einrichten
+    function setupDualRangeSliders() {
+      // Stotterrate Slider
+      const stutterRateMin = document.getElementById('filter-stutter-rate-min');
+      const stutterRateMax = document.getElementById('filter-stutter-rate-max');
+      const stutterRateProgress = document.getElementById('stutter-rate-progress');
+      const stutterRateMinValue = document.getElementById('stutter-rate-min-value');
+      const stutterRateMaxValue = document.getElementById('stutter-rate-max-value');
+
+      // Stotter-Wahrscheinlichkeit Slider
+      const stutterProbMin = document.getElementById('filter-stutter-prob-min');
+      const stutterProbMax = document.getElementById('filter-stutter-prob-max');
+      const stutterProbProgress = document.getElementById('stutter-prob-progress');
+      const stutterProbMinValue = document.getElementById('stutter-prob-min-value');
+      const stutterProbMaxValue = document.getElementById('stutter-prob-max-value');
+
+      // Funktion zur Aktualisierung des Progress-Balkens
+      function updateProgress(min, max, progressElement) {
+        const minVal = parseInt(min.value);
+        const maxVal = parseInt(max.value);
+        progressElement.style.left = (minVal / max.max) * 100 + '%';
+        progressElement.style.right = 100 - (maxVal / max.max) * 100 + '%';
+      }
+
+      // Event Listener für Stotterrate
+      stutterRateMin.addEventListener('input', function() {
+        let min = parseFloat(this.value);
+        let max = parseFloat(stutterRateMax.value);
+        
+        if (min > max) {
+          this.value = max;
+          min = max;
+        }
+        
+        stutterRateMinValue.textContent = `Von: ${min.toFixed(1)}%`;
+        updateProgress(stutterRateMin, stutterRateMax, stutterRateProgress);
+      });
+
+      stutterRateMax.addEventListener('input', function() {
+        let min = parseFloat(stutterRateMin.value);
+        let max = parseFloat(this.value);
+        
+        if (max < min) {
+          this.value = min;
+          max = min;
+        }
+        
+        stutterRateMaxValue.textContent = `Bis: ${max.toFixed(1)}%`;
+        updateProgress(stutterRateMin, stutterRateMax, stutterRateProgress);
+      });
+
+      // Event Listener für Stotter-Wahrscheinlichkeit
+      stutterProbMin.addEventListener('input', function() {
+        let min = parseFloat(this.value);
+        let max = parseFloat(stutterProbMax.value);
+        
+        if (min > max) {
+          this.value = max;
+          min = max;
+        }
+        
+        stutterProbMinValue.textContent = `Von: ${min.toFixed(2)}`;
+        updateProgress(stutterProbMin, stutterProbMax, stutterProbProgress);
+      });
+
+      stutterProbMax.addEventListener('input', function() {
+        let min = parseFloat(stutterProbMin.value);
+        let max = parseFloat(this.value);
+        
+        if (max < min) {
+          this.value = min;
+          max = min;
+        }
+        
+        stutterProbMaxValue.textContent = `Bis: ${max.toFixed(2)}`;
+        updateProgress(stutterProbMin, stutterProbMax, stutterProbProgress);
+      });
+
+      // Initiale Progress-Balken setzen
+      updateProgress(stutterRateMin, stutterRateMax, stutterRateProgress);
+      updateProgress(stutterProbMin, stutterProbMax, stutterProbProgress);
+    }
+
+    // Filter anwenden
+    function applyFilters() {
+      currentFilters = {
+        model: document.getElementById('filter-model').value,
+        quantization: document.getElementById('filter-quantization').value,
+        stutterRateMin: parseFloat(document.getElementById('filter-stutter-rate-min').value),
+        stutterRateMax: parseFloat(document.getElementById('filter-stutter-rate-max').value),
+        stutterProbMin: parseFloat(document.getElementById('filter-stutter-prob-min').value),
+        stutterProbMax: parseFloat(document.getElementById('filter-stutter-prob-max').value),
+        hasNotes: document.getElementById('filter-notes').checked
+      };
+
+      filterConversations();
+    }
+
+    // Gespräche filtern
+    function filterConversations() {
+      const tiles = document.querySelectorAll('.conversation-tile');
+      let visibleCount = 0;
+
+      tiles.forEach((tile, index) => {
+        const conversation = conversationData[index];
+        let shouldShow = true;
+
+        // Modell-Filter
+        if (currentFilters.model && conversation.model_used !== currentFilters.model) {
+          shouldShow = false;
+        }
+
+        // Quantisierungs-Filter
+        if (currentFilters.quantization) {
+          const quantValue = conversation.quantization_used.toString();
+          if (quantValue !== currentFilters.quantization) {
+            shouldShow = false;
+          }
+        }
+
+        // Stotterrate Filter (Von-Bis Bereich)
+        if (currentFilters.stutterRateMin !== undefined && 
+            conversation.stutter_statistics.stutter_rate < currentFilters.stutterRateMin) {
+          shouldShow = false;
+        }
+        if (currentFilters.stutterRateMax !== undefined && 
+            conversation.stutter_statistics.stutter_rate > currentFilters.stutterRateMax) {
+          shouldShow = false;
+        }
+
+        // Stotter-Wahrscheinlichkeit Filter (Von-Bis Bereich)
+        if (currentFilters.stutterProbMin !== undefined && 
+            conversation.parameters.stutter_probability < currentFilters.stutterProbMin) {
+          shouldShow = false;
+        }
+        if (currentFilters.stutterProbMax !== undefined && 
+            conversation.parameters.stutter_probability > currentFilters.stutterProbMax) {
+          shouldShow = false;
+        }
+
+        // Notizen-Filter
+        if (currentFilters.hasNotes) {
+          const note = loadNote(conversation.timestamp);
+          if (!note || !note.trim()) {
+            shouldShow = false;
+          }
+        }
+
+        // Kachel anzeigen/verstecken
+        if (shouldShow) {
+          tile.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          tile.classList.add('hidden');
+        }
+      });
+
+      // "Keine Ergebnisse"-Meldung anzeigen
+      showNoResultsMessage(visibleCount === 0);
+    }
+
+    // "Keine Ergebnisse"-Meldung anzeigen/verstecken
+    function showNoResultsMessage(show) {
+      let noResults = document.querySelector('.no-results');
+      
+      if (show && !noResults) {
+        noResults = document.createElement('div');
+        noResults.className = 'no-results';
+        noResults.textContent = 'Keine Gespräche entsprechen den ausgewählten Filtern.';
+        document.getElementById('conversation-grid').appendChild(noResults);
+      } else if (!show && noResults) {
+        noResults.remove();
+      }
+    }
+
+    // Filter zurücksetzen
+    function resetFilters() {
+      document.getElementById('filter-model').value = '';
+      document.getElementById('filter-quantization').value = '';
+      document.getElementById('filter-notes').checked = false;
+      
+      // Slider zurücksetzen
+      document.getElementById('filter-stutter-rate-min').value = 0;
+      document.getElementById('filter-stutter-rate-max').value = 100;
+      document.getElementById('filter-stutter-prob-min').value = 0;
+      document.getElementById('filter-stutter-prob-max').value = 1;
+      
+      document.getElementById('stutter-rate-min-value').textContent = 'Von: 0%';
+      document.getElementById('stutter-rate-max-value').textContent = 'Bis: 100%';
+      document.getElementById('stutter-prob-min-value').textContent = 'Von: 0';
+      document.getElementById('stutter-prob-max-value').textContent = 'Bis: 1.0';
+      
+      // Progress-Balken zurücksetzen
+      setupDualRangeSliders();
+      
+      currentFilters = {};
+      filterConversations();
+    }
+
+    // Kacheln für die Gespräche erstellen
+    function createConversationTiles() {
+      const grid = document.getElementById('conversation-grid');
+      
+      conversationData.forEach((conversation, index) => {
+        const tile = document.createElement('div');
+        tile.className = 'conversation-tile';
+        tile.dataset.index = index;
+        tile.dataset.id = conversation.timestamp;
+        
+        const date = new Date(conversation.timestamp);
+        const formattedDate = date.toLocaleDateString('de-DE', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+
+        // Prompts für die Vorschau vorbereiten
+        const stutterPrompt = conversation.ai_behavior_commands.stutter_ai_system_prompt;
+        const normalPrompt = conversation.ai_behavior_commands.normal_ai_system_prompt;
+        
+        // Notiz für diese Konversation laden
+        const note = loadNote(conversation.timestamp);
+        const hasNote = note && note.trim();
+        
+        tile.innerHTML = `
+          ${hasNote ? '<div class="note-indicator" title="Hat Notiz">📝</div>' : ''}
+          <h3>Gespräch ${index + 1}</h3>
+          <p class="tile-info">
+            <strong>Datum:</strong> ${formattedDate}
+          </p>
+          <p class="tile-info">
+            <strong>Modell:</strong> ${conversation.model_used}
+          </p>
+          <p class="tile-info">
+            <strong>Quantisierung:</strong> ${conversation.quantization_used ? 'Aktiviert' : 'Deaktiviert'}
+          </p>
+          <p class="tile-info">
+            <strong>Stotter-Wahrscheinlichkeit:</strong> ${conversation.parameters.stutter_probability}
+          </p>
+          
+          <div class="tile-stats">
+            <div class="tile-stat">
+              <div class="tile-stat-value">${conversation.stutter_statistics.stutter_rate}%</div>
+              <div class="tile-stat-label">Stotterrate</div>
+            </div>
+            <div class="tile-stat">
+              <div class="tile-stat-value">${conversation.conversation_metrics.total_messages}</div>
+              <div class="tile-stat-label">Nachrichten</div>
+            </div>
+          </div>
+          
+          <div class="prompts-preview">
+            <div class="prompt-item">
+              <div class="prompt-type">Stotter-AI Prompt</div>
+              <div class="prompt-text">${stutterPrompt}</div>
+            </div>
+            <div class="prompt-item">
+              <div class="prompt-type">Normale AI Prompt</div>
+              <div class="prompt-text">${normalPrompt}</div>
+            </div>
+          </div>
+          
+          <div class="note-preview ${hasNote ? 'has-note' : ''}">
+            ${hasNote ? (note.length > 100 ? note.substring(0, 100) + '...' : note) : 'Klicken um Notiz hinzuzufügen...'}
+          </div>
+        `;
+        
+        tile.addEventListener('click', () => toggleConversationDetails(index));
+        grid.appendChild(tile);
+      });
+    }
+
+    // Details zu einem bestimmten Gespräch anzeigen/ausblenden
+    function toggleConversationDetails(index) {
+      const grid = document.getElementById('conversation-grid');
+      
+      // Wenn bereits aktive Details vorhanden sind, entfernen
+      if (activeConversationIndex !== null) {
+        const existingDetails = document.querySelector('.conversation-details-container');
+        if (existingDetails) {
+          existingDetails.remove();
+        }
+        
+        // Aktive Kachel zurücksetzen
+        const activeTile = document.querySelector(`.conversation-tile[data-index="${activeConversationIndex}"]`);
+        if (activeTile) {
+          activeTile.classList.remove('active');
+        }
+        
+        // Wenn dieselbe Kachel erneut geklickt wird, Details ausblenden
+        if (activeConversationIndex === index) {
+          activeConversationIndex = null;
+          return;
+        }
+      }
+      
+      // Neue Details anzeigen
+      activeConversationIndex = index;
+      const conversation = conversationData[index];
+      const tile = document.querySelector(`.conversation-tile[data-index="${index}"]`);
+      
+      // Kachel als aktiv markieren
+      tile.classList.add('active');
+      
+      // Details-Container erstellen
+      const detailsContainer = document.createElement('div');
+      detailsContainer.className = 'conversation-details-container active';
+      detailsContainer.dataset.index = index;
+      
+      const date = new Date(conversation.timestamp);
+      const formattedDate = date.toLocaleDateString('de-DE', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+      
+      // Aktuelle Notiz laden
+      const currentNote = loadNote(conversation.timestamp);
+      
+      // Statistiken-Karten erstellen
+      const statsHTML = `
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value">${conversation.stutter_statistics.stutter_rate}%</div>
+            <div class="stat-label">Stotterrate</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">${conversation.stutter_statistics.stuttered_words}</div>
+            <div class="stat-label">Gestotterte Wörter</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">${conversation.conversation_metrics.total_messages}</div>
+            <div class="stat-label">Nachrichten</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">${conversation.conversation_metrics.average_response_time.toFixed(2)}s</div>
+            <div class="stat-label">Durchschn. Antwortzeit</div>
+          </div>
+        </div>
+      `;
+      
+      // Gesprächsblöcke erstellen
+      let conversationHTML = '';
+      conversation.conversation_data.forEach(c => {
+        let stutterDetailsHTML = '';
+        if (c.stutter_details && c.stutter_details.length > 0) {
+          stutterDetailsHTML = `
+            <div class="stutter-details">
+              <strong>Stotterdetails:</strong>
+              ${c.stutter_details.map(detail => 
+                `<div class="stutter-detail-item">
+                  <strong>"${detail.original_word}"</strong> → "${detail.stuttered_word}" (${detail.type})
+                </div>`
+              ).join('')}
+            </div>
+          `;
+        }
+        
+        conversationHTML += `
+          <div class="conversation-block">
+            <p class="round">Runde ${c.round}</p>
+            <p class="speaker">
+              <span class="stutter-indicator ${c.is_stuttered ? 'stutter-true' : 'stutter-false'}"></span>
+              ${c.speaker} (${c.ai_type})
+            </p>
+            <div class="message-content">
+              <strong>Nachricht:</strong> ${c.message}
+            </div>
+            ${c.clean_message ? `
+              <div class="message-content">
+                <strong>Bereinigte Nachricht:</strong> ${c.clean_message}
+              </div>
+            ` : ''}
+            ${stutterDetailsHTML}
+            <p><strong>Antwortzeit:</strong> ${c.response_time_seconds ? c.response_time_seconds.toFixed(2) + 's' : 'N/A'}</p>
+            <details>
+              <summary>Vollständiger Prompt</summary>
+              <pre>${c.full_prompt_used}</pre>
+            </details>
+          </div>
+        `;
+      });
+
+      // AI Behavior Commands anzeigen
+      const aiCommandsHTML = `
+        <div class="collapsible-section">
+          <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <h3>AI Behavior Commands</h3>
+            <span class="collapsible-icon">▼</span>
+          </div>
+          <div class="collapsible-content">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div>
+                <h4>Stotter-AI Prompt:</h4>
+                <pre>${conversation.ai_behavior_commands.stutter_ai_system_prompt}</pre>
+              </div>
+              <div>
+                <h4>Normale AI Prompt:</h4>
+                <pre>${conversation.ai_behavior_commands.normal_ai_system_prompt}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Notiz-Sektion
+      const noteSectionHTML = `
+        <div class="collapsible-section">
+          <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <h3>Notizen zu diesem Gespräch</h3>
+            <span class="collapsible-icon">▼</span>
+          </div>
+          <div class="collapsible-content">
+            <textarea class="note-textarea" id="note-textarea-${conversation.timestamp}" 
+                      placeholder="Notizen zu diesem Therapiegespräch...">${currentNote || ''}</textarea>
+            <div class="note-actions">
+              <button class="note-button note-save" onclick="saveNote('${conversation.timestamp}', document.getElementById('note-textarea-${conversation.timestamp}').value)">
+                Notiz speichern
+              </button>
+              <button class="note-button note-clear" onclick="saveNote('${conversation.timestamp}', ''); document.getElementById('note-textarea-${conversation.timestamp}').value = ''">
+                Notiz löschen
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      detailsContainer.innerHTML = `
+        <button class="back-button" onclick="closeConversationDetails()">Details schließen</button>
+        <h2>Gespräch ${index + 1} - ${formattedDate}</h2>
+        
+        ${noteSectionHTML}
+        
+        <div class="collapsible-section">
+          <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <h3>Allgemeine Informationen</h3>
+            <span class="collapsible-icon">▼</span>
+          </div>
+          <div class="collapsible-content">
+            <pre>
+Modell: ${conversation.model_used}
+Zeitstempel: ${formattedDate}
+Ladezeit des Modells (s): ${conversation.model_load_time_seconds}
+Quantisierung verwendet: ${conversation.quantization_used}
+Quantisierungskonfiguration: ${conversation.quantization_config}
+            </pre>
+          </div>
+        </div>
+
+        ${aiCommandsHTML}
+        
+        <div class="collapsible-section">
+          <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <h3>Parameter</h3>
+            <span class="collapsible-icon">▼</span>
+          </div>
+          <div class="collapsible-content">
+            <pre>${JSON.stringify(conversation.parameters, null, 2)}</pre>
+          </div>
+        </div>
+        
+        <div class="collapsible-section">
+          <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <h3>Systeminformationen</h3>
+            <span class="collapsible-icon">▼</span>
+          </div>
+          <div class="collapsible-content">
+            <pre>${JSON.stringify(conversation.system_info, null, 2)}</pre>
+          </div>
+        </div>
+        
+        <div class="collapsible-section">
+          <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <h3>Stotter-Statistiken</h3>
+            <span class="collapsible-icon">▼</span>
+          </div>
+          <div class="collapsible-content">
+            ${statsHTML}
+            <pre>
+Gesamtwörter: ${conversation.stutter_statistics.total_words}
+Gestotterte Wörter: ${conversation.stutter_statistics.stuttered_words}
+Stotterrate: ${conversation.stutter_statistics.stutter_rate}%
+            </pre>
+            
+            <h4>Stottertypen:</h4>
+            <pre>${JSON.stringify(conversation.stutter_statistics.stutter_types, null, 2)}</pre>
+            
+            <h4>Stottermuster:</h4>
+            <pre>${conversation.stutter_statistics.stutter_patterns.join(', ')}</pre>
+          </div>
+        </div>
+        
+        <div class="collapsible-section">
+          <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <h3>Gesprächsmetriken</h3>
+            <span class="collapsible-icon">▼</span>
+          </div>
+          <div class="collapsible-content">
+            <pre>${JSON.stringify(conversation.conversation_metrics, null, 2)}</pre>
+          </div>
+        </div>
+        
+        <div class="collapsible-section">
+          <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <h3>Gesprächsverlauf</h3>
+            <span class="collapsible-icon">▼</span>
+          </div>
+          <div class="collapsible-content">
+            ${conversationHTML}
+          </div>
+        </div>
+      `;
+      
+      // Details-Container direkt nach der angeklickten Kachel einfügen
+      tile.after(detailsContainer);
+      
+      // Stelle sicher, dass die anderen Kacheln sichtbar bleiben
+      const allTiles = document.querySelectorAll('.conversation-tile');
+      allTiles.forEach(t => {
+        if (t !== tile) {
+          t.style.display = 'block'; // Sicherstellen, dass andere Kacheln angezeigt werden
+        }
+      });
+    }
+
+    // Auf-/Zuklappen-Funktion für die Sektionen
+    function toggleCollapsible(header) {
+      const content = header.nextElementSibling;
+      const isActive = header.classList.contains('active');
+      
+      // Alle anderen Sektionen schließen (optional)
+      // document.querySelectorAll('.collapsible-header.active').forEach(h => {
+      //   if (h !== header) {
+      //     h.classList.remove('active');
+      //     h.nextElementSibling.classList.remove('active');
+      //   }
+      // });
+      
+      // Aktuelle Sektion umschalten
+      header.classList.toggle('active');
+      content.classList.toggle('active');
+    }
+
+    // Details schließen
+    function closeConversationDetails() {
+      if (activeConversationIndex !== null) {
+        const detailsContainer = document.querySelector('.conversation-details-container');
+        if (detailsContainer) {
+          detailsContainer.remove();
+        }
+        
+        const activeTile = document.querySelector(`.conversation-tile[data-index="${activeConversationIndex}"]`);
+        if (activeTile) {
+          activeTile.classList.remove('active');
+        }
+        
+        activeConversationIndex = null;
+      }
+    }
+  </script>
+
+</body>
+</html>
