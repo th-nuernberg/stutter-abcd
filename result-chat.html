@@ -16,6 +16,11 @@
       --border-color: #e0e0e0;
       --note-color: #fff3cd;
       --note-border: #ffc107;
+      --original-color: #e8f5e8;
+      --filtered-color: #fff3e0;
+      --processing-color: #e3f2fd;
+      --context-color: #e8f5e8;
+      --role-color: #fff0e8;
     }
 
     body {
@@ -60,6 +65,12 @@
       margin-bottom: 0.75rem;
       font-size: 1.3rem;
       font-weight: 600;
+    }
+
+    h4 {
+      color: var(--primary-color);
+      margin: 1rem 0 0.5rem;
+      font-size: 1.1rem;
     }
 
     pre {
@@ -502,6 +513,37 @@
       font-size: 0.85rem;
     }
 
+    .original-message {
+      background: var(--original-color);
+      border-left: 2px solid #28a745;
+    }
+
+    .filtered-message {
+      background: var(--filtered-color);
+      border-left: 2px solid #ffc107;
+    }
+
+    .processing-step {
+      background: var(--processing-color);
+      border-left: 2px solid var(--primary-color);
+      margin: 0.5rem 0;
+      padding: 0.75rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    .processing-step-title {
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 0.25rem;
+      font-size: 0.8rem;
+    }
+
+    .processing-step-content {
+      font-size: 0.8rem;
+      line-height: 1.4;
+    }
+
     .stutter-details {
       margin-top: 0.5rem;
       padding: 0.5rem;
@@ -518,7 +560,7 @@
       border-radius: 3px;
       border: 1px solid #ffe0b2;
     }
-
+    
     .prompts-preview {
       margin-top: 0.75rem;
       flex-grow: 1;
@@ -737,6 +779,117 @@
       height: 16px;
     }
 
+    /* Evaluation Metrics Styles */
+    .evaluation-metrics {
+      margin-top: 1rem;
+    }
+
+    .evaluation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .evaluation-card {
+      background: #f8fbff;
+      border-radius: 8px;
+      padding: 1rem;
+      border-left: 4px solid var(--primary-color);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .evaluation-card.context {
+      border-left-color: #28a745;
+      background: var(--context-color);
+    }
+
+    .evaluation-card.role {
+      border-left-color: var(--secondary-color);
+      background: var(--role-color);
+    }
+
+    .evaluation-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .evaluation-card.context .evaluation-value {
+      color: #28a745;
+    }
+
+    .evaluation-card.role .evaluation-value {
+      color: var(--secondary-color);
+    }
+
+    .evaluation-label {
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .evaluation-description {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
+    .evaluation-message {
+      background: white;
+      border-radius: 6px;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      border-left: 3px solid var(--primary-color);
+      font-size: 0.85rem;
+    }
+
+    .evaluation-message-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .evaluation-message-speaker {
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    .evaluation-message-scores {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.8rem;
+    }
+
+    .evaluation-score {
+      background: rgba(0, 87, 163, 0.1);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .evaluation-score.context {
+      background: rgba(40, 167, 69, 0.1);
+      color: #28a745;
+    }
+
+    .evaluation-score.role {
+      background: rgba(255, 107, 53, 0.1);
+      color: var(--secondary-color);
+    }
+
+    .evaluation-message-content {
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
     /* Responsive Design */
     @media (max-width: 1024px) {
       .filter-bar {
@@ -777,6 +930,10 @@
       
       .collapsible-header h3 {
         font-size: 1.1rem;
+      }
+      
+      .evaluation-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -1212,6 +1369,73 @@
       });
     }
 
+    // Prüfen, ob es sich um einen neuen Eintrag handelt (basierend auf verfügbaren Verarbeitungsschritten)
+    function isNewEntry(conversation) {
+      // Wenn after_speaker_removal oder after_sentence_limiting fehlen, ist es ein neuer Eintrag
+      const firstMessage = conversation.conversation_data[0];
+      if (firstMessage && firstMessage.filter_processing_steps) {
+        const steps = firstMessage.filter_processing_steps;
+        return !steps.after_speaker_removal && !steps.after_sentence_limiting;
+      }
+      return false;
+    }
+
+    // Evaluation-Metriken Sektion erstellen
+    function createEvaluationMetricsSection(conversation) {
+      const evaluationMetrics = conversation.evaluation_metrics;
+      
+      if (!evaluationMetrics) {
+        return '<p>Keine Evaluationsmetriken verfügbar.</p>';
+      }
+
+      // Durchschnittswerte anzeigen
+      const averageHTML = `
+        <div class="evaluation-grid">
+          <div class="evaluation-card context">
+            <div class="evaluation-value">${evaluationMetrics.average_context_relevance?.toFixed(3) || 'N/A'}</div>
+            <div class="evaluation-label">Context Relevance</div>
+            <div class="evaluation-description">Durchschnittliche Kontext-Relevanz</div>
+          </div>
+          <div class="evaluation-card role">
+            <div class="evaluation-value">${evaluationMetrics.average_role_consistency?.toFixed(3) || 'N/A'}</div>
+            <div class="evaluation-label">Role Consistency</div>
+            <div class="evaluation-description">Durchschnittliche Rollen-Treue</div>
+          </div>
+        </div>
+      `;
+
+      // Einzelne Nachrichten mit ihren Metriken
+      let messagesHTML = '';
+      
+      conversation.conversation_data.forEach((message, msgIndex) => {
+        const metrics = message.evaluation_metrics;
+        if (metrics) {
+          messagesHTML += `
+            <div class="evaluation-message">
+              <div class="evaluation-message-header">
+                <div class="evaluation-message-speaker">
+                  Runde ${message.round} - ${message.speaker} (${message.ai_type})
+                </div>
+                <div class="evaluation-message-scores">
+                  <span class="evaluation-score context">Context: ${metrics.context_relevance?.toFixed(3) || 'N/A'}</span>
+                  <span class="evaluation-score role">Role: ${metrics.role_consistency?.toFixed(3) || 'N/A'}</span>
+                </div>
+              </div>
+              <div class="evaluation-message-content">
+                <strong>Nachricht:</strong> ${message.clean_message || message.message}
+              </div>
+            </div>
+          `;
+        }
+      });
+
+      return `
+        ${averageHTML}
+        <h4>Einzelne Nachrichten-Bewertungen:</h4>
+        ${messagesHTML || '<p>Keine Einzelbewertungen verfügbar.</p>'}
+      `;
+    }
+
     // Details zu einem bestimmten Gespräch anzeigen/ausblenden
     function toggleConversationDetails(index) {
       const grid = document.getElementById('conversation-grid');
@@ -1240,6 +1464,7 @@
       activeConversationIndex = index;
       const conversation = conversationData[index];
       const tile = document.querySelector(`.conversation-tile[data-index="${index}"]`);
+      const isNew = isNewEntry(conversation);
       
       // Kachel als aktiv markieren
       tile.classList.add('active');
@@ -1277,13 +1502,13 @@
             <div class="stat-label">Nachrichten</div>
           </div>
           <div class="stat-card">
-            <div class="stat-value">${conversation.conversation_metrics.average_response_time.toFixed(2)}s</div>
+            <div class="stat-value">${conversation.conversation_metrics.average_response_time ? conversation.conversation_metrics.average_response_time.toFixed(2) + 's' : 'N/A'}</div>
             <div class="stat-label">Durchschn. Antwortzeit</div>
           </div>
         </div>
       `;
       
-      // Gesprächsblöcke erstellen
+      // Gesprächsblöcke erstellen - unterschiedlich für alte und neue Einträge
       let conversationHTML = '';
       conversation.conversation_data.forEach(c => {
         let stutterDetailsHTML = '';
@@ -1299,6 +1524,93 @@
             </div>
           `;
         }
+
+        // Verarbeitungsschritte anzeigen - unterschiedlich für alte und neue Einträge
+        let processingStepsHTML = '';
+        if (c.filter_processing_steps) {
+          const steps = c.filter_processing_steps;
+          
+          if (isNew) {
+            // NEUE EINTRÄGE: Nur reduzierte Schritte anzeigen
+            processingStepsHTML = `
+              <div class="processing-steps">
+                <h4>Text-Verarbeitungsschritte:</h4>
+                ${steps.raw_response ? `
+                <div class="processing-step">
+                  <div class="processing-step-title">1. Roh-Antwort (vom Modell):</div>
+                  <div class="processing-step-content">${steps.raw_response}</div>
+                </div>
+                ` : ''}
+                ${steps.after_basic_cleaning ? `
+                <div class="processing-step">
+                  <div class="processing-step-title">2. Nach grundlegender Bereinigung:</div>
+                  <div class="processing-step-content">${steps.after_basic_cleaning}</div>
+                </div>
+                ` : ''}
+                ${steps.after_word_filtering ? `
+                <div class="processing-step">
+                  <div class="processing-step-title">3. Nach Wort-Filterung (final):</div>
+                  <div class="processing-step-content">${steps.after_word_filtering}</div>
+                </div>
+                ` : ''}
+              </div>
+            `;
+          } else {
+            // ALTE EINTRÄGE: Alle Schritte anzeigen
+            processingStepsHTML = `
+              <div class="processing-steps">
+                <h4>Text-Verarbeitungsschritte:</h4>
+                <div class="processing-step">
+                  <div class="processing-step-title">1. Roh-Antwort (vom Modell):</div>
+                  <div class="processing-step-content">${steps.raw_response || 'Nicht verfügbar'}</div>
+                </div>
+                <div class="processing-step">
+                  <div class="processing-step-title">2. Nach grundlegender Bereinigung:</div>
+                  <div class="processing-step-content">${steps.after_basic_cleaning || 'Nicht verfügbar'}</div>
+                </div>
+                <div class="processing-step">
+                  <div class="processing-step-title">3. Nach Entfernung von Sprecher-Labels:</div>
+                  <div class="processing-step-content">${steps.after_speaker_removal || 'Nicht verfügbar'}</div>
+                </div>
+                <div class="processing-step">
+                  <div class="processing-step-title">4. Nach Satz-Begrenzung:</div>
+                  <div class="processing-step-content">${steps.after_sentence_limiting || 'Nicht verfügbar'}</div>
+                </div>
+                ${steps.after_repetition_removal ? `
+                <div class="processing-step">
+                  <div class="processing-step-title">5. Nach Entfernung repetitiver Muster:</div>
+                  <div class="processing-step-content">${steps.after_repetition_removal}</div>
+                </div>
+                ` : ''}
+                <div class="processing-step">
+                  <div class="processing-step-title">${steps.after_repetition_removal ? '6.' : '5.'} Nach Wort-Filterung (final):</div>
+                  <div class="processing-step-content">${steps.after_word_filtering || 'Nicht verfügbar'}</div>
+                </div>
+              </div>
+            `;
+          }
+        }
+
+        // Erstelle Vergleich zwischen Original und gefilterter Nachricht
+        let messageComparisonHTML = '';
+        if (c.clean_message && c.message !== c.clean_message) {
+          messageComparisonHTML = `
+            <div class="message-comparison">
+              <div class="message-content original-message">
+                <strong>Original (vor Filterung):</strong> ${c.message}
+              </div>
+              <div class="message-content filtered-message">
+                <strong>Nach Filterung:</strong> ${c.clean_message}
+              </div>
+            </div>
+          `;
+        } else {
+          messageComparisonHTML = `
+            <div class="message-content">
+              <strong>Nachricht:</strong> ${c.message}
+            </div>
+          `;
+        }
         
         conversationHTML += `
           <div class="conversation-block">
@@ -1307,20 +1619,22 @@
               <span class="stutter-indicator ${c.is_stuttered ? 'stutter-true' : 'stutter-false'}"></span>
               ${c.speaker} (${c.ai_type})
             </p>
-            <div class="message-content">
-              <strong>Nachricht:</strong> ${c.message}
-            </div>
-            ${c.clean_message ? `
-              <div class="message-content">
-                <strong>Bereinigte Nachricht:</strong> ${c.clean_message}
-              </div>
-            ` : ''}
+            ${messageComparisonHTML}
+            ${processingStepsHTML}
             ${stutterDetailsHTML}
             <p><strong>Antwortzeit:</strong> ${c.response_time_seconds ? c.response_time_seconds.toFixed(2) + 's' : 'N/A'}</p>
+            ${!isNew ? `
             <details>
               <summary>Vollständiger Prompt</summary>
               <pre>${c.full_prompt_used}</pre>
             </details>
+            ${c.context_messages && c.context_messages.length > 0 ? `
+            <details>
+              <summary>Kontext-Nachrichten (${c.context_messages.length})</summary>
+              <pre>${JSON.stringify(c.context_messages, null, 2)}</pre>
+            </details>
+            ` : ''}
+            ` : ''}
           </div>
         `;
       });
@@ -1347,6 +1661,21 @@
         </div>
       `;
 
+      // Evaluation Metrics Sektion
+      const evaluationMetricsHTML = `
+        <div class="collapsible-section">
+          <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <h3>Evaluation Metriken</h3>
+            <span class="collapsible-icon">▼</span>
+          </div>
+          <div class="collapsible-content">
+            <div class="evaluation-metrics">
+              ${createEvaluationMetricsSection(conversation)}
+            </div>
+          </div>
+        </div>
+      `;
+
       // Notiz-Sektion
       const noteSectionHTML = `
         <div class="collapsible-section">
@@ -1368,10 +1697,38 @@
           </div>
         </div>
       `;
+
+      // Unterschiedliche Inhalte für alte und neue Einträge
+      let additionalSections = '';
+      
+      if (!isNew) {
+        // ALTE EINTRÄGE: Alle Sektionen anzeigen
+        additionalSections = `
+          <div class="collapsible-section">
+            <div class="collapsible-header" onclick="toggleCollapsible(this)">
+              <h3>Systeminformationen</h3>
+              <span class="collapsible-icon">▼</span>
+            </div>
+            <div class="collapsible-content">
+              <pre>${JSON.stringify(conversation.system_info, null, 2)}</pre>
+            </div>
+          </div>
+          
+          <div class="collapsible-section">
+            <div class="collapsible-header" onclick="toggleCollapsible(this)">
+              <h3>Gesprächsmetriken</h3>
+              <span class="collapsible-icon">▼</span>
+            </div>
+            <div class="collapsible-content">
+              <pre>${JSON.stringify(conversation.conversation_metrics, null, 2)}</pre>
+            </div>
+          </div>
+        `;
+      }
       
       detailsContainer.innerHTML = `
         <button class="back-button" onclick="closeConversationDetails()">Details schließen</button>
-        <h2>Gespräch ${index + 1} - ${formattedDate}</h2>
+        <h2>Gespräch ${index + 1} - ${formattedDate} ${isNew ? '<span style="color: var(--secondary-color); font-size: 0.8rem;">(Neuer Eintrag)</span>' : ''}</h2>
         
         ${noteSectionHTML}
         
@@ -1386,7 +1743,8 @@ Modell: ${conversation.model_used}
 Zeitstempel: ${formattedDate}
 Ladezeit des Modells (s): ${conversation.model_load_time_seconds}
 Quantisierung verwendet: ${conversation.quantization_used}
-Quantisierungskonfiguration: ${conversation.quantization_config}
+${!isNew ? `Quantisierungskonfiguration: ${conversation.quantization_config}` : ''}
+Kontext-Fenster: ${conversation.parameters.context_window} Nachrichten
             </pre>
           </div>
         </div>
@@ -1403,15 +1761,9 @@ Quantisierungskonfiguration: ${conversation.quantization_config}
           </div>
         </div>
         
-        <div class="collapsible-section">
-          <div class="collapsible-header" onclick="toggleCollapsible(this)">
-            <h3>Systeminformationen</h3>
-            <span class="collapsible-icon">▼</span>
-          </div>
-          <div class="collapsible-content">
-            <pre>${JSON.stringify(conversation.system_info, null, 2)}</pre>
-          </div>
-        </div>
+        ${evaluationMetricsHTML}
+        
+        ${additionalSections}
         
         <div class="collapsible-section">
           <div class="collapsible-header" onclick="toggleCollapsible(this)">
@@ -1429,18 +1781,10 @@ Stotterrate: ${conversation.stutter_statistics.stutter_rate}%
             <h4>Stottertypen:</h4>
             <pre>${JSON.stringify(conversation.stutter_statistics.stutter_types, null, 2)}</pre>
             
+            ${!isNew ? `
             <h4>Stottermuster:</h4>
-            <pre>${conversation.stutter_statistics.stutter_patterns.join(', ')}</pre>
-          </div>
-        </div>
-        
-        <div class="collapsible-section">
-          <div class="collapsible-header" onclick="toggleCollapsible(this)">
-            <h3>Gesprächsmetriken</h3>
-            <span class="collapsible-icon">▼</span>
-          </div>
-          <div class="collapsible-content">
-            <pre>${JSON.stringify(conversation.conversation_metrics, null, 2)}</pre>
+            <pre>${conversation.stutter_statistics.stutter_patterns ? conversation.stutter_statistics.stutter_patterns.join(', ') : 'Keine Muster verfügbar'}</pre>
+            ` : ''}
           </div>
         </div>
         
@@ -1471,14 +1815,6 @@ Stotterrate: ${conversation.stutter_statistics.stutter_rate}%
     function toggleCollapsible(header) {
       const content = header.nextElementSibling;
       const isActive = header.classList.contains('active');
-      
-      // Alle anderen Sektionen schließen (optional)
-      // document.querySelectorAll('.collapsible-header.active').forEach(h => {
-      //   if (h !== header) {
-      //     h.classList.remove('active');
-      //     h.nextElementSibling.classList.remove('active');
-      //   }
-      // });
       
       // Aktuelle Sektion umschalten
       header.classList.toggle('active');
