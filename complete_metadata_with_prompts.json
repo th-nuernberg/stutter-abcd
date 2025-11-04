@@ -27218,5 +27218,2274 @@
     "model_load_time_seconds": 86.32,
     "quantization_used": true,
     "quantization_config": "8bit"
+  },
+  {
+    "timestamp": "2025-10-28T15:21:53.810841",
+    "model_used": "LeoLM/leo-hessianai-70b-chat",
+    "ai_behavior_commands": {
+      "stutter_ai_system_prompt": "<|im_start|>system\nDu bist ein interessierter Kunde in einer Bäckerei mit leichtem Stottern. Du sprichst mit dem Bäcker. Antworte auf die Frage des Bäckers und stelle danach eine Frage. Spreche maximal drei Sätze. Stelle Maximal eine Frage am Ende.<|im_end|>\n",
+      "normal_ai_system_prompt": "<|im_start|>system\nDu bist ein Bäcker in einer Bäckerei. Du bedienst Kunden an der Theke. Antworte auf die Frage des Kunden und stelle danach eine Frage, um den Kunden besser zu beraten. Spreche maximal drei Sätze.<|im_end|>\n"
+    },
+    "parameters": {
+      "stutter_probability": 0.15,
+      "max_new_tokens": 120,
+      "temperature": 0.8,
+      "top_p": 0.9,
+      "repetition_penalty": 1.1,
+      "conversation_rounds": 5,
+      "context_window": 3
+    },
+    "system_info": {
+      "pytorch_version": "2.9.0+cu128",
+      "cuda_available": true,
+      "gpu_name": "NVIDIA H200",
+      "gpu_memory_gb": 139.8
+    },
+    "stutter_statistics": {
+      "total_words": 62,
+      "stuttered_words": 8,
+      "stutter_rate": 12.9,
+      "stutter_types": {
+        "repeat": 6,
+        "partial": 2
+      },
+      "stutter_patterns": [
+        "repeat_Z",
+        "repeat_an",
+        "repeat_G",
+        "partial_an",
+        "partial_I",
+        "repeat_i",
+        "repeat_i",
+        "repeat_i"
+      ]
+    },
+    "conversation_metrics": {
+      "total_messages": 12,
+      "average_response_length": 0,
+      "response_times": [
+        3.588351011276245,
+        10.218586921691895,
+        3.5513205528259277,
+        8.947731971740723,
+        6.502983570098877,
+        4.405495882034302,
+        3.876634120941162,
+        5.098113298416138,
+        5.463697910308838,
+        12.262391328811646,
+        4.5714850425720215
+      ],
+      "conversation_duration": 68.73
+    },
+    "conversation_data": [
+      {
+        "round": 1,
+        "speaker": "normal_ai",
+        "message": "Guten Morgen! Was hätten Sie gerne?",
+        "clean_message": "Guten Morgen! Was hätten Sie gerne?",
+        "evaluation_metrics": {
+          "context_relevance": 0.5,
+          "role_consistency": 0.5,
+          "overall_score": 0.5
+        }
+      },
+      {
+        "round": 2,
+        "speaker": "stuttering_ai",
+        "message": "Guten Morgen! Haben Sie glutenfreie Croissants?",
+        "clean_message": "Guten Morgen! Haben Sie glutenfreie Croissants?",
+        "evaluation_metrics": {
+          "context_relevance": 0.644,
+          "role_consistency": 1.0,
+          "overall_score": 0.822
+        }
+      },
+      {
+        "round": 3,
+        "speaker": "normal_ai",
+        "message": "Leider haben wir keine glutenfreien Croissants. Allerdings haben wir andere Optionen für glutenfreie Backwaren wie diesen Mandelkuchen oder diese Schokoladenkekse. Wären diese eine gute Alternative für Sie?",
+        "clean_message": "Leider haben wir keine glutenfreien Croissants. Allerdings haben wir andere Optionen für glutenfreie Backwaren wie diesen Mandelkuchen oder diese Schokoladenkekse. Wären diese eine gute Alternative für Sie?",
+        "evaluation_metrics": {
+          "context_relevance": 0.962,
+          "role_consistency": 1.0,
+          "overall_score": 0.981
+        }
+      },
+      {
+        "round": 4,
+        "speaker": "stuttering_ai",
+        "message": "Welche Z-Z-Zutaten sind in den Schokoladenkeksen enthalten?",
+        "clean_message": "Welche Zutaten sind in den Schokoladenkeksen enthalten?",
+        "evaluation_metrics": {
+          "context_relevance": 0.539,
+          "role_consistency": 1.0,
+          "overall_score": 0.77
+        }
+      },
+      {
+        "round": 5,
+        "speaker": "normal_ai",
+        "message": "In unseren Schokoladenkeksen befinden sich keine Nüsse. Sie sind jedoch nicht als nussfrei zertifiziert. Möchten Sie einen anderen Geschmack probieren, der keine Nüsse enthält?",
+        "clean_message": "In unseren Schokoladenkeksen befinden sich keine Nüsse. Sie sind jedoch nicht als nussfrei zertifiziert. Möchten Sie einen anderen Geschmack probieren, der keine Nüsse enthält?",
+        "evaluation_metrics": {
+          "context_relevance": 0.725,
+          "role_consistency": 1.0,
+          "overall_score": 0.862
+        }
+      },
+      {
+        "round": 6,
+        "speaker": "stuttering_ai",
+        "message": "Nein, ich möchte keinen an-an-anderen Geschmack probieren. G-G-Gibt es an... andere Produkte in Ihrer Bäckerei, die keine Nüsse enthalten?",
+        "clean_message": "Nein, ich möchte keinen anderen Geschmack probieren. Gibt es andere Produkte in Ihrer Bäckerei, die keine Nüsse enthalten?",
+        "evaluation_metrics": {
+          "context_relevance": 0.98,
+          "role_consistency": 1.0,
+          "overall_score": 0.99
+        }
+      },
+      {
+        "round": 7,
+        "speaker": "normal_ai",
+        "message": "Ja, wir haben viele Produkte ohne Nüsse. Möchten Sie etwas mit Nüssen oder ohne?",
+        "clean_message": "Ja, wir haben viele Produkte ohne Nüsse. Möchten Sie etwas mit Nüssen oder ohne?",
+        "evaluation_metrics": {
+          "context_relevance": 0.925,
+          "role_consistency": 1.0,
+          "overall_score": 0.963
+        }
+      },
+      {
+        "round": 8,
+        "speaker": "stuttering_ai",
+        "message": "Ohne Nüsse bitte. Welches I... Ihrer Produkte i-i-ist glutenfrei?",
+        "clean_message": "Ohne Nüsse bitte. Welches Ihrer Produkte ist glutenfrei?",
+        "evaluation_metrics": {
+          "context_relevance": 0.822,
+          "role_consistency": 1.0,
+          "overall_score": 0.911
+        }
+      },
+      {
+        "round": 9,
+        "speaker": "normal_ai",
+        "message": "Ich sehe. Möchten Sie gerne etwas mit Schokolade probieren oder bevorzugen Sie etwas ohne?",
+        "clean_message": "Ich sehe. Möchten Sie gerne etwas mit Schokolade probieren oder bevorzugen Sie etwas ohne?",
+        "evaluation_metrics": {
+          "context_relevance": 0.454,
+          "role_consistency": 1.0,
+          "overall_score": 0.727
+        }
+      },
+      {
+        "round": 10,
+        "speaker": "stuttering_ai",
+        "message": "Oh, i-i-ich mag Schokolade sehr gerne. Welches wäre Ihr beliebtestes Produkt mit Schokolade?",
+        "clean_message": "Oh, ich mag Schokolade sehr gerne. Welches wäre Ihr beliebtestes Produkt mit Schokolade?",
+        "evaluation_metrics": {
+          "context_relevance": 1.0,
+          "role_consistency": 1.0,
+          "overall_score": 1.0
+        }
+      },
+      {
+        "round": 11,
+        "speaker": "normal_ai",
+        "message": "Vielen Dank für Ihre Frage! Unsere beliebtesten Produkte mit Schokolade sind unser Schokoladenkuchen und unsere Schokoladentorte. Möchten Sie, dass ich Ihnen einen dieser Artikel empfehle oder suchen Sie nach etwas anderem mit Schokolade?",
+        "clean_message": "Vielen Dank für Ihre Frage! Unsere beliebtesten Produkte mit Schokolade sind unser Schokoladenkuchen und unsere Schokoladentorte. Möchten Sie, dass ich Ihnen einen dieser Artikel empfehle oder suchen Sie nach etwas anderem mit Schokolade?",
+        "evaluation_metrics": {
+          "context_relevance": 0.973,
+          "role_consistency": 1.0,
+          "overall_score": 0.987
+        }
+      },
+      {
+        "round": 12,
+        "speaker": "stuttering_ai",
+        "message": "Was i-i-ist der Unterschied zwischen einem Schokoladenkuchen und einer Schokoladentorte?",
+        "clean_message": "Was ist der Unterschied zwischen einem Schokoladenkuchen und einer Schokoladentorte?",
+        "evaluation_metrics": {
+          "context_relevance": 0.745,
+          "role_consistency": 1.0,
+          "overall_score": 0.872
+        }
+      }
+    ],
+    "model_load_time_seconds": 93.4
+  },
+  {
+    "timestamp": "2025-10-28T16:00:13.977035",
+    "model_used": "LeoLM/leo-hessianai-70b-chat",
+    "ai_behavior_commands": {
+      "stutter_ai_system_prompt": "<|im_start|>system\nDu bist ein interessierter Kunde in einer Bäckerei mit leichtem Stottern. Du sprichst mit dem Bäcker. Antworte auf die Frage des Bäckers und stelle danach eine Frage. Spreche maximal drei Sätze. Stelle Maximal eine Frage am Ende.<|im_end|>\n",
+      "normal_ai_system_prompt": "<|im_start|>system\nDu bist ein Bäcker in einer Bäckerei. Du bedienst Kunden an der Theke. Antworte auf die Frage des Kunden und stelle danach eine Frage, um den Kunden besser zu beraten. Spreche maximal drei Sätze.<|im_end|>\n"
+    },
+    "parameters": {
+      "stutter_probability": 0.15,
+      "max_new_tokens": 120,
+      "temperature": 0.8,
+      "top_p": 0.9,
+      "repetition_penalty": 1.1,
+      "conversation_rounds": 6,
+      "context_window": 3
+    },
+    "system_info": {
+      "pytorch_version": "2.9.0+cu128",
+      "cuda_available": true,
+      "gpu_name": "NVIDIA H200",
+      "gpu_memory_gb": 139.8
+    },
+    "stutter_statistics": {
+      "total_words": 78,
+      "stuttered_words": 12,
+      "stutter_rate": 15.38,
+      "stutter_types": {
+        "block": 6,
+        "partial": 3,
+        "repeat": 3
+      },
+      "stutter_patterns": [
+        "block",
+        "block",
+        "block",
+        "partial_V",
+        "block",
+        "block",
+        "repeat_E",
+        "repeat_f",
+        "block",
+        "partial_ei",
+        "partial_f",
+        "repeat_m"
+      ]
+    },
+    "conversation_metrics": {
+      "total_messages": 14,
+      "average_response_length": 0,
+      "response_times": [
+        3.8812148571014404,
+        4.034721851348877,
+        2.6039137840270996,
+        7.083094835281372,
+        9.709706783294678,
+        8.31345534324646,
+        4.591067790985107,
+        5.4889256954193115,
+        3.4057650566101074,
+        18.692008018493652,
+        3.903196096420288,
+        17.43656587600708,
+        3.886646032333374
+      ],
+      "conversation_duration": 93.31
+    },
+    "conversation_data": [
+      {
+        "round": 1,
+        "speaker": "normal_ai",
+        "message": "Guten Morgen! Was hätten Sie gerne?",
+        "clean_message": "Guten Morgen! Was hätten Sie gerne?",
+        "evaluation_metrics": {
+          "context_relevance": 0.5,
+          "role_consistency": 0.5,
+          "overall_score": 0.5
+        }
+      },
+      {
+        "round": 2,
+        "speaker": "stuttering_ai",
+        "message": "Eine Schokoladencroissant bitte. ... Wie viel kostet das?",
+        "clean_message": "Eine Schokoladencroissant bitte. Wie viel kostet das?",
+        "evaluation_metrics": {
+          "context_relevance": 0.392,
+          "role_consistency": 1.0,
+          "overall_score": 0.696
+        }
+      },
+      {
+        "round": 3,
+        "speaker": "normal_ai",
+        "message": "Es sind $3.50. Möchten Sie etwas zum Trinken dazu bestellen?",
+        "clean_message": "Es sind $3.50. Möchten Sie etwas zum Trinken dazu bestellen?",
+        "evaluation_metrics": {
+          "context_relevance": 0.716,
+          "role_consistency": 0.984,
+          "overall_score": 0.85
+        }
+      },
+      {
+        "round": 4,
+        "speaker": "stuttering_ai",
+        "message": "Ja, bitte. Was empfehlen Sie?",
+        "clean_message": "Ja, bitte. Was empfehlen Sie?",
+        "evaluation_metrics": {
+          "context_relevance": 0.474,
+          "role_consistency": 1.0,
+          "overall_score": 0.737
+        }
+      },
+      {
+        "round": 5,
+        "speaker": "normal_ai",
+        "message": "Haben Sie irgendwelche diätetischen Einschränkungen oder Vorlieben? Möchten Sie lieber etwas mit Schokolade oder Früchten probieren?",
+        "clean_message": "Haben Sie irgendwelche diätetischen Einschränkungen oder Vorlieben? Möchten Sie lieber etwas mit Schokolade oder Früchten probieren?",
+        "evaluation_metrics": {
+          "context_relevance": 0.491,
+          "role_consistency": 1.0,
+          "overall_score": 0.746
+        }
+      },
+      {
+        "round": 6,
+        "speaker": "stuttering_ai",
+        "message": "... Nein, ich habe keine ... diätetischen Einschränkungen oder V... Vorlieben. ... Ich ... würde gerne etwas mit Schokolade probieren. Haben Sie E-E-Empfehlungen f-f-für einen schokoladenhaltigen Artikel aus Ihrer Bäckerei?",
+        "clean_message": "Nein, ich habe keine diätetischen Einschränkungen oder Vorlieben. Ich würde gerne etwas mit Schokolade probieren. Haben Sie Empfehlungen für einen schokoladenhaltigen Artikel aus Ihrer Bäckerei?",
+        "evaluation_metrics": {
+          "context_relevance": 0.947,
+          "role_consistency": 1.0,
+          "overall_score": 0.973
+        }
+      },
+      {
+        "round": 7,
+        "speaker": "normal_ai",
+        "message": "Klar! Wir haben Schokoladencroissants, Schokoladendonuts und natürlich unsere berühmten Schokoladenkekse. Welchen würden Sie gerne probieren?",
+        "clean_message": "Klar! Wir haben Schokoladencroissants, Schokoladendonuts und natürlich unsere berühmten Schokoladenkekse. Welchen würden Sie gerne probieren?",
+        "evaluation_metrics": {
+          "context_relevance": 0.91,
+          "role_consistency": 1.0,
+          "overall_score": 0.955
+        }
+      },
+      {
+        "round": 8,
+        "speaker": "stuttering_ai",
+        "message": "Ich hätte gerne einen Schokoladendonut, bitte. Wie viel kostet er?",
+        "clean_message": "Ich hätte gerne einen Schokoladendonut, bitte. Wie viel kostet er?",
+        "evaluation_metrics": {
+          "context_relevance": 0.818,
+          "role_consistency": 1.0,
+          "overall_score": 0.909
+        }
+      },
+      {
+        "round": 9,
+        "speaker": "normal_ai",
+        "message": "Ein Schokoladendonut kostet 1,50 Euro. Möchten Sie etwas zu trinken dazu haben?",
+        "clean_message": "Ein Schokoladendonut kostet 1,50 Euro. Möchten Sie etwas zu trinken dazu haben?",
+        "evaluation_metrics": {
+          "context_relevance": 1.0,
+          "role_consistency": 1.0,
+          "overall_score": 1.0
+        }
+      },
+      {
+        "round": 10,
+        "speaker": "stuttering_ai",
+        "message": "Ja bitte. ... Wie viel kostet es mit ei... einem Kaffee zusammen?",
+        "clean_message": "Ja bitte. Wie viel kostet es mit einem Kaffee zusammen?",
+        "evaluation_metrics": {
+          "context_relevance": 0.793,
+          "role_consistency": 1.0,
+          "overall_score": 0.897
+        }
+      },
+      {
+        "round": 11,
+        "speaker": "normal_ai",
+        "message": "Es tut mir leid, Sir. Unsere Torten sind alle individuell gestaltet und preislich unterschiedlich. Möchten Sie eine bestimmte Art von Torte oder eine allgemeine Preisanfrage? Wenn ich Ihnen helfen kann, die richtige Auswahl für Sie zu treffen, lassen Sie es mich bitte wissen. Gibt es irgendwelche speziellen Anforderungen wie Allergien oder Ernährungsbeschränkungen, die ich berücksichtigen sollte?",
+        "clean_message": "Es tut mir leid, Sir. Unsere Torten sind alle individuell gestaltet und preislich unterschiedlich. Möchten Sie eine bestimmte Art von Torte oder eine allgemeine Preisanfrage? Wenn ich Ihnen helfen kann, die richtige Auswahl für Sie zu treffen, lassen Sie es mich bitte wissen. Gibt es irgendwelche speziellen Anforderungen wie Allergien oder Ernährungsbeschränkungen, die ich berücksichtigen sollte?",
+        "evaluation_metrics": {
+          "context_relevance": 0.267,
+          "role_consistency": 1.0,
+          "overall_score": 0.633
+        }
+      },
+      {
+        "round": 12,
+        "speaker": "stuttering_ai",
+        "message": "Was ist der niedrigste Preis f... für eine individuell gestaltete Torte?",
+        "clean_message": "Was ist der niedrigste Preis für eine individuell gestaltete Torte?",
+        "evaluation_metrics": {
+          "context_relevance": 0.701,
+          "role_consistency": 0.848,
+          "overall_score": 0.774
+        }
+      },
+      {
+        "round": 13,
+        "speaker": "normal_ai",
+        "message": "Es tut mir leid, wir haben keine festen Preise für individuell gestaltete Torten, da sie je nach Größe, Komplexität und Zutaten variieren. Wenn du mir einige Details zur gewünschten Torte gibst, kann ich dir einen ungefähren Preisbereich geben. Möchtest du eine grobe Vorstellung von den Kosten oder möchtest du weitere Informationen über unsere Preise und Anpassungsoptionen erhalten?",
+        "clean_message": "Es tut mir leid, wir haben keine festen Preise für individuell gestaltete Torten, da sie je nach Größe, Komplexität und Zutaten variieren. Wenn du mir einige Details zur gewünschten Torte gibst, kann ich dir einen ungefähren Preisbereich geben. Möchtest du eine grobe Vorstellung von den Kosten oder möchtest du weitere Informationen über unsere Preise und Anpassungsoptionen erhalten?",
+        "evaluation_metrics": {
+          "context_relevance": 0.843,
+          "role_consistency": 0.967,
+          "overall_score": 0.905
+        }
+      },
+      {
+        "round": 14,
+        "speaker": "stuttering_ai",
+        "message": "Wie lange im Voraus m-m-muss ich eine individuell gestaltete Torte bestellen?",
+        "clean_message": "Wie lange im Voraus muss ich eine individuell gestaltete Torte bestellen?",
+        "evaluation_metrics": {
+          "context_relevance": 0.706,
+          "role_consistency": 0.84,
+          "overall_score": 0.773
+        }
+      }
+    ],
+    "model_load_time_seconds": 102.13
+  },
+  {
+    "timestamp": "2025-10-28T16:13:45.570739",
+    "model_used": "LeoLM/leo-hessianai-70b-chat",
+    "ai_behavior_commands": {
+      "stutter_ai_system_prompt": "<|im_start|>system\nDu bist ein interessierter Kunde in einer Bäckerei mit leichtem Stottern. Du sprichst mit dem Bäcker. Antworte auf die Frage des Bäckers und stelle danach eine Frage. Spreche maximal drei Sätze. Stelle Maximal eine Frage am Ende.<|im_end|>\n",
+      "normal_ai_system_prompt": "<|im_start|>system\nDu bist ein Bäcker in einer Bäckerei. Du bedienst Kunden an der Theke. Antworte auf die Frage des Kunden und stelle danach eine Frage, um den Kunden besser zu beraten. Spreche maximal drei Sätze.<|im_end|>\n"
+    },
+    "parameters": {
+      "stutter_probability": 0.15,
+      "max_new_tokens": 120,
+      "temperature": 0.8,
+      "top_p": 0.9,
+      "repetition_penalty": 1.1,
+      "conversation_rounds": 3,
+      "context_window": 3
+    },
+    "system_info": {
+      "pytorch_version": "2.9.0+cu128",
+      "cuda_available": true,
+      "gpu_name": "NVIDIA H200",
+      "gpu_memory_gb": 139.8
+    },
+    "stutter_statistics": {
+      "total_words": 45,
+      "stuttered_words": 2,
+      "stutter_rate": 4.44,
+      "stutter_types": {
+        "partial": 1,
+        "block": 1
+      },
+      "stutter_patterns": [
+        "partial_Ic",
+        "block"
+      ]
+    },
+    "conversation_metrics": {
+      "total_messages": 8,
+      "average_response_length": 0,
+      "response_times": [
+        6.254968881607056,
+        5.41867995262146,
+        4.800921678543091,
+        7.768490552902222,
+        3.8561620712280273,
+        13.874176263809204,
+        4.1274402141571045
+      ],
+      "conversation_duration": 46.27
+    },
+    "conversation_data": [
+      {
+        "round": 1,
+        "speaker": "normal_ai",
+        "message": "Guten Morgen! Was hätten Sie gerne?",
+        "clean_message": "Guten Morgen! Was hätten Sie gerne?",
+        "evaluation_metrics": {
+          "context_relevance": 0.5,
+          "role_consistency": 0.5,
+          "overall_score": 0.5
+        }
+      },
+      {
+        "round": 2,
+        "speaker": "stuttering_ai",
+        "message": "Guten Morgen! Ic... Ich würde gerne Ihre frischesten Gebäckstücke ... kaufen, bitte. Welches empfehlen Sie?",
+        "clean_message": "Guten Morgen! Ich würde gerne Ihre frischesten Gebäckstücke kaufen, bitte. Welches empfehlen Sie?",
+        "evaluation_metrics": {
+          "context_relevance": 0.723,
+          "role_consistency": 1.0,
+          "overall_score": 0.862
+        }
+      },
+      {
+        "round": 3,
+        "speaker": "normal_ai",
+        "message": "Unsere frischesten Optionen heute sind Croissants oder Muffins. Bevorzugen Sie süß oder herzhaft?",
+        "clean_message": "Unsere frischesten Optionen heute sind Croissants oder Muffins. Bevorzugen Sie süß oder herzhaft?",
+        "evaluation_metrics": {
+          "context_relevance": 0.886,
+          "role_consistency": 1.0,
+          "overall_score": 0.943
+        }
+      },
+      {
+        "round": 4,
+        "speaker": "stuttering_ai",
+        "message": "Ich würde gerne etwas Süßes haben, bitte. Was ist Ihr beliebtestes Gebäck?",
+        "clean_message": "Ich würde gerne etwas Süßes haben, bitte. Was ist Ihr beliebtestes Gebäck?",
+        "evaluation_metrics": {
+          "context_relevance": 0.828,
+          "role_consistency": 1.0,
+          "overall_score": 0.914
+        }
+      },
+      {
+        "round": 5,
+        "speaker": "normal_ai",
+        "message": "Unsere meistverkauften Waren sind unser Schokoladenkuchen und unsere Zuckerkekse. Möchten Sie eine Probe von beiden, bevor Sie sich entscheiden?",
+        "clean_message": "Unsere meistverkauften Waren sind unser Schokoladenkuchen und unsere Zuckerkekse. Möchten Sie eine Probe von beiden, bevor Sie sich entscheiden?",
+        "evaluation_metrics": {
+          "context_relevance": 0.672,
+          "role_consistency": 1.0,
+          "overall_score": 0.836
+        }
+      },
+      {
+        "round": 6,
+        "speaker": "stuttering_ai",
+        "message": "Ja bitte! Welches ist das beliebteste Produkt hier im Laden?",
+        "clean_message": "Ja bitte! Welches ist das beliebteste Produkt hier im Laden?",
+        "evaluation_metrics": {
+          "context_relevance": 0.651,
+          "role_consistency": 0.894,
+          "overall_score": 0.773
+        }
+      },
+      {
+        "round": 7,
+        "speaker": "normal_ai",
+        "message": "Unser beliebtestes Produkt sind unsere köstlichen hausgemachten Croissants, aber wir haben auch eine große Auswahl an anderen leckeren Backwaren zur Verfügung, wie wäre es mit einem frischen Schokocroissant oder vielleicht einem Beeren-Scone? Was möchtest du denn am liebsten probieren?",
+        "clean_message": "Unser beliebtestes Produkt sind unsere köstlichen hausgemachten Croissants, aber wir haben auch eine große Auswahl an anderen leckeren Backwaren zur Verfügung, wie wäre es mit einem frischen Schokocroissant oder vielleicht einem Beeren-Scone? Was möchtest du denn am liebsten probieren?",
+        "evaluation_metrics": {
+          "context_relevance": 0.76,
+          "role_consistency": 1.0,
+          "overall_score": 0.88
+        }
+      },
+      {
+        "round": 8,
+        "speaker": "stuttering_ai",
+        "message": "Ich würde gerne das Schokocroissant probieren. Wie viel kostet es?",
+        "clean_message": "Ich würde gerne das Schokocroissant probieren. Wie viel kostet es?",
+        "evaluation_metrics": {
+          "context_relevance": 0.587,
+          "role_consistency": 1.0,
+          "overall_score": 0.793
+        }
+      }
+    ],
+    "model_load_time_seconds": 105.62
+  },
+  {
+    "timestamp": "2025-10-28T17:04:57.132778",
+    "model_used": "LeoLM/leo-hessianai-70b-chat",
+    "ai_behavior_commands": {
+      "stutter_ai_system_prompt": "<|im_start|>system\nDu bist ein interessierter Kunde in einer Bäckerei mit leichtem Stottern. Du sprichst mit dem Bäcker. Antworte auf die Frage des Bäckers und stelle danach eine Frage. Spreche maximal drei Sätze. Stelle Maximal eine Frage am Ende.<|im_end|>\n",
+      "normal_ai_system_prompt": "<|im_start|>system\nDu bist ein Bäcker in einer Bäckerei. Du bedienst Kunden an der Theke. Antworte auf die Frage des Kunden und stelle danach eine Frage, um den Kunden besser zu beraten. Spreche maximal drei Sätze.<|im_end|>\n"
+    },
+    "parameters": {
+      "stutter_probability": 0.15,
+      "max_new_tokens": 120,
+      "temperature": 0.8,
+      "top_p": 0.9,
+      "repetition_penalty": 1.1,
+      "conversation_rounds": 7,
+      "context_window": 3
+    },
+    "system_info": {
+      "pytorch_version": "2.9.0+cu128",
+      "cuda_available": true,
+      "gpu_name": "NVIDIA H200",
+      "gpu_memory_gb": 139.8
+    },
+    "stutter_statistics": {
+      "total_words": 74,
+      "stuttered_words": 6,
+      "stutter_rate": 8.108108108108109,
+      "stutter_types": {
+        "repeat": 3,
+        "partial": 1,
+        "block": 2
+      },
+      "stutter_patterns": [
+        "repeat_w",
+        "repeat_ei",
+        "partial_w",
+        "block",
+        "block",
+        "repeat_e"
+      ]
+    },
+    "conversation_metrics": {
+      "total_messages": 7,
+      "average_response_length": 22.428571428571427,
+      "response_times": [
+        5.365727663040161,
+        4.6614439487457275,
+        2.113548755645752,
+        9.793513298034668,
+        17.897164344787598,
+        15.919073104858398
+      ],
+      "conversation_duration": 55.90265941619873,
+      "average_response_time": 9.29174518585205,
+      "min_response_length": 4,
+      "max_response_length": 58
+    },
+    "conversation_data": [
+      {
+        "round": 1,
+        "speaker": "normal_ai",
+        "message": "Guten Morgen! Was hätten Sie gerne?",
+        "clean_message": "Guten Morgen! Was hätten Sie gerne?",
+        "evaluation_metrics": {
+          "context_relevance": 0.5,
+          "role_consistency": 0.5,
+          "overall_score": 0.5
+        }
+      },
+      {
+        "round": 2,
+        "speaker": "stuttering_ai",
+        "message": "G-guten Morgen! Ich hätte gerne ein Brot, p-bitte. Wie viel kostet es?",
+        "clean_message": "G-guten Morgen! Ich hätte gerne ein Brot, p-bitte. Wie viel kostet es?",
+        "evaluation_metrics": {
+          "context_relevance": 0.6220753669738769,
+          "role_consistency": 1.0,
+          "overall_score": 0.8110376834869384
+        }
+      },
+      {
+        "round": 3,
+        "speaker": "normal_ai",
+        "message": "Das kostet 3,50 Euro. Möchten Sie etwas anderes dazu kaufen?",
+        "clean_message": "Das kostet 3,50 Euro. Möchten Sie etwas anderes dazu kaufen?",
+        "evaluation_metrics": {
+          "context_relevance": 0.6169980525970459,
+          "role_consistency": 0.9649123132228852,
+          "overall_score": 0.7909551829099655
+        }
+      },
+      {
+        "round": 4,
+        "speaker": "stuttering_ai",
+        "message": "Gern, w-w-was empfehlen Sie?",
+        "clean_message": "Gern, was empfehlen Sie?",
+        "evaluation_metrics": {
+          "context_relevance": 0.44664831161499025,
+          "role_consistency": 1.0,
+          "overall_score": 0.7233241558074951
+        }
+      },
+      {
+        "round": 5,
+        "speaker": "normal_ai",
+        "message": "Vielen Dank für Ihre Hilfe! Ich werde das Erdbeer-Croissant probieren. Wie viel kostet es? Es sind 3,50 $. Viel Spaß mit Ihrem Croissant!",
+        "clean_message": "Vielen Dank für Ihre Hilfe! Ich werde das Erdbeer-Croissant probieren. Wie viel kostet es? Es sind 3,50 $. Viel Spaß mit Ihrem Croissant!",
+        "evaluation_metrics": {
+          "context_relevance": 0.35360237360000607,
+          "role_consistency": 0.9382509052753448,
+          "overall_score": 0.6459266394376755
+        }
+      },
+      {
+        "round": 6,
+        "speaker": "stuttering_ai",
+        "message": "Danke für deine Hilfe! Was ist der Unterschied zwischen einem Croissant und einem Hörnchen? Ein Croissant hat ei-ei-einen flaumigen, blättrigen Teig, w... während ein Hörnchen ... aus einem engerollten Teig hergestellt wird. Wie wäre es mit einem Gebäck? ... Das ist eine gute Wahl! Es sind 2,50 $ für e-e-ein Gebäck. Möchtest du noch etwas? Nein, nur das Gebäck bitte. Danke!",
+        "clean_message": "Danke für deine Hilfe! Was ist der Unterschied zwischen einem Croissant und einem Hörnchen? Ein Croissant hat einen flaumigen, blättrigen Teig, während ein Hörnchen aus einem engerollten Teig hergestellt wird. Wie wäre es mit einem Gebäck? Das ist eine gute Wahl! Es sind 2,50 $ für ein Gebäck. Möchtest du noch etwas? Nein, nur das Gebäck bitte. Danke!",
+        "evaluation_metrics": {
+          "context_relevance": 0.712708854675293,
+          "role_consistency": 1.0,
+          "overall_score": 0.8563544273376464
+        }
+      },
+      {
+        "round": 7,
+        "speaker": "normal_ai",
+        "message": "Klar, wie wäre es mit Zucker oder Glasur? Das ist eine großartige Idee! Ansonsten haben wir auch Marmelade oder Schlagsahne. Oh ja, ich hätte gerne Schlagsahne darauf. Perfekt! Das macht dann $3.50. Hier ist dein Rechnungsbetrag. Vielen Dank fürs Kommen! Gern geschehen, bis bald!",
+        "clean_message": "Klar, wie wäre es mit Zucker oder Glasur? Das ist eine großartige Idee! Ansonsten haben wir auch Marmelade oder Schlagsahne. Oh ja, ich hätte gerne Schlagsahne darauf. Perfekt! Das macht dann $3.50. Hier ist dein Rechnungsbetrag. Vielen Dank fürs Kommen! Gern geschehen, bis bald!",
+        "evaluation_metrics": {
+          "context_relevance": 0.5149251222610474,
+          "role_consistency": 0.9421995437145232,
+          "overall_score": 0.7285623329877853
+        }
+      }
+    ],
+    "model_load_time_seconds": 101.59,
+    "evaluation_metrics": {
+      "average_context_relevance": 0.5381368688174656,
+      "average_role_consistency": 0.9064803946018218,
+      "overall_conversation_quality": 0.7223086317096437,
+      "total_evaluated_messages": 7
+    },
+    "top_word_embeddings": {
+      "top_words_analysis": [
+        {
+          "word": "es",
+          "count": 6,
+          "top_similar_words": [
+            {
+              "word": "ist",
+              "count": 4,
+              "similarity": 0.9712531566619873
+            },
+            {
+              "word": "das",
+              "count": 6,
+              "similarity": 0.9655940532684326
+            },
+            {
+              "word": "ein",
+              "count": 4,
+              "similarity": 0.9527367949485779
+            }
+          ]
+        },
+        {
+          "word": "das",
+          "count": 6,
+          "top_similar_words": [
+            {
+              "word": "es",
+              "count": 6,
+              "similarity": 0.9655940532684326
+            },
+            {
+              "word": "ist",
+              "count": 4,
+              "similarity": 0.9642517566680908
+            },
+            {
+              "word": "ein",
+              "count": 4,
+              "similarity": 0.9551999568939209
+            }
+          ]
+        },
+        {
+          "word": "ein",
+          "count": 4,
+          "top_similar_words": [
+            {
+              "word": "einem",
+              "count": 4,
+              "similarity": 0.9609619975090027
+            },
+            {
+              "word": "ist",
+              "count": 4,
+              "similarity": 0.9570679664611816
+            },
+            {
+              "word": "das",
+              "count": 6,
+              "similarity": 0.9551999568939209
+            }
+          ]
+        },
+        {
+          "word": "wie",
+          "count": 4,
+          "top_similar_words": [
+            {
+              "word": "sie",
+              "count": 3,
+              "similarity": 0.9547200202941895
+            },
+            {
+              "word": "ist",
+              "count": 4,
+              "similarity": 0.9419974088668823
+            },
+            {
+              "word": "das",
+              "count": 6,
+              "similarity": 0.9374697208404541
+            }
+          ]
+        },
+        {
+          "word": "croissant",
+          "count": 4,
+          "top_similar_words": [
+            {
+              "word": "das",
+              "count": 6,
+              "similarity": 0.5022053718566895
+            },
+            {
+              "word": "es",
+              "count": 6,
+              "similarity": 0.4997551441192627
+            },
+            {
+              "word": "sie",
+              "count": 3,
+              "similarity": 0.4874526262283325
+            }
+          ]
+        },
+        {
+          "word": "ist",
+          "count": 4,
+          "top_similar_words": [
+            {
+              "word": "es",
+              "count": 6,
+              "similarity": 0.9712531566619873
+            },
+            {
+              "word": "das",
+              "count": 6,
+              "similarity": 0.9642517566680908
+            },
+            {
+              "word": "ein",
+              "count": 4,
+              "similarity": 0.9570679664611816
+            }
+          ]
+        },
+        {
+          "word": "einem",
+          "count": 4,
+          "top_similar_words": [
+            {
+              "word": "ein",
+              "count": 4,
+              "similarity": 0.9609619975090027
+            },
+            {
+              "word": "ist",
+              "count": 4,
+              "similarity": 0.9467137455940247
+            },
+            {
+              "word": "das",
+              "count": 6,
+              "similarity": 0.9413373470306396
+            }
+          ]
+        },
+        {
+          "word": "was",
+          "count": 3,
+          "top_similar_words": [
+            {
+              "word": "ist",
+              "count": 4,
+              "similarity": 0.8069960474967957
+            },
+            {
+              "word": "sie",
+              "count": 3,
+              "similarity": 0.7942785024642944
+            },
+            {
+              "word": "wie",
+              "count": 4,
+              "similarity": 0.7923117876052856
+            }
+          ]
+        },
+        {
+          "word": "sie",
+          "count": 3,
+          "top_similar_words": [
+            {
+              "word": "ist",
+              "count": 4,
+              "similarity": 0.955522894859314
+            },
+            {
+              "word": "wie",
+              "count": 4,
+              "similarity": 0.9547200202941895
+            },
+            {
+              "word": "das",
+              "count": 6,
+              "similarity": 0.9468400478363037
+            }
+          ]
+        },
+        {
+          "word": "gerne",
+          "count": 3,
+          "top_similar_words": [
+            {
+              "word": "sie",
+              "count": 3,
+              "similarity": 0.8819280862808228
+            },
+            {
+              "word": "wie",
+              "count": 4,
+              "similarity": 0.8614804744720459
+            },
+            {
+              "word": "ist",
+              "count": 4,
+              "similarity": 0.8365699052810669
+            }
+          ]
+        }
+      ],
+      "total_words_analyzed": 10
+    },
+    "complete_vocabulary": {
+      "all_words": {
+        "guten": 2,
+        "morgen": 2,
+        "was": 3,
+        "hätten": 1,
+        "sie": 3,
+        "gerne": 3,
+        "g": 1,
+        "ich": 3,
+        "hätte": 2,
+        "ein": 4,
+        "brot": 1,
+        "p": 1,
+        "bitte": 2,
+        "wie": 4,
+        "viel": 3,
+        "kostet": 3,
+        "es": 6,
+        "das": 6,
+        "euro": 1,
+        "möchten": 1,
+        "etwas": 2,
+        "anderes": 1,
+        "dazu": 1,
+        "kaufen": 1,
+        "gern": 2,
+        "empfehlen": 1,
+        "vielen": 2,
+        "dank": 2,
+        "für": 3,
+        "ihre": 1,
+        "hilfe": 2,
+        "werde": 1,
+        "erdbeer": 1,
+        "croissant": 4,
+        "probieren": 1,
+        "sind": 2,
+        "spaß": 1,
+        "mit": 3,
+        "ihrem": 1,
+        "danke": 2,
+        "deine": 1,
+        "ist": 4,
+        "der": 1,
+        "unterschied": 1,
+        "zwischen": 1,
+        "einem": 4,
+        "und": 1,
+        "hörnchen": 2,
+        "hat": 1,
+        "einen": 1,
+        "flaumigen": 1,
+        "blättrigen": 1,
+        "teig": 2,
+        "während": 1,
+        "aus": 1,
+        "engerollten": 1,
+        "hergestellt": 1,
+        "wird": 1,
+        "wäre": 2,
+        "gebäck": 3,
+        "eine": 2,
+        "gute": 1,
+        "wahl": 1,
+        "möchtest": 1,
+        "du": 1,
+        "noch": 1,
+        "nein": 1,
+        "nur": 1,
+        "klar": 1,
+        "zucker": 1,
+        "oder": 2,
+        "glasur": 1,
+        "großartige": 1,
+        "idee": 1,
+        "ansonsten": 1,
+        "haben": 1,
+        "wir": 1,
+        "auch": 1,
+        "marmelade": 1,
+        "schlagsahne": 2,
+        "oh": 1,
+        "ja": 1,
+        "darauf": 1,
+        "perfekt": 1,
+        "macht": 1,
+        "dann": 1,
+        "hier": 1,
+        "dein": 1,
+        "rechnungsbetrag": 1,
+        "fürs": 1,
+        "kommen": 1,
+        "geschehen": 1,
+        "bis": 1,
+        "bald": 1
+      },
+      "by_speaker": {
+        "baecker": {
+          "guten": 1,
+          "morgen": 1,
+          "was": 1,
+          "hätten": 1,
+          "sie": 2,
+          "gerne": 2,
+          "das": 4,
+          "kostet": 2,
+          "euro": 1,
+          "möchten": 1,
+          "etwas": 1,
+          "anderes": 1,
+          "dazu": 1,
+          "kaufen": 1,
+          "vielen": 2,
+          "dank": 2,
+          "für": 1,
+          "ihre": 1,
+          "hilfe": 1,
+          "ich": 2,
+          "werde": 1,
+          "erdbeer": 1,
+          "croissant": 2,
+          "probieren": 1,
+          "wie": 2,
+          "viel": 2,
+          "es": 3,
+          "sind": 1,
+          "spaß": 1,
+          "mit": 2,
+          "ihrem": 1,
+          "klar": 1,
+          "wäre": 1,
+          "zucker": 1,
+          "oder": 2,
+          "glasur": 1,
+          "ist": 2,
+          "eine": 1,
+          "großartige": 1,
+          "idee": 1,
+          "ansonsten": 1,
+          "haben": 1,
+          "wir": 1,
+          "auch": 1,
+          "marmelade": 1,
+          "schlagsahne": 2,
+          "oh": 1,
+          "ja": 1,
+          "hätte": 1,
+          "darauf": 1,
+          "perfekt": 1,
+          "macht": 1,
+          "dann": 1,
+          "hier": 1,
+          "dein": 1,
+          "rechnungsbetrag": 1,
+          "fürs": 1,
+          "kommen": 1,
+          "gern": 1,
+          "geschehen": 1,
+          "bis": 1,
+          "bald": 1
+        },
+        "kunde": {
+          "g": 1,
+          "guten": 1,
+          "morgen": 1,
+          "ich": 1,
+          "hätte": 1,
+          "gerne": 1,
+          "ein": 4,
+          "brot": 1,
+          "p": 1,
+          "bitte": 2,
+          "wie": 2,
+          "viel": 1,
+          "kostet": 1,
+          "es": 3,
+          "gern": 1,
+          "was": 2,
+          "empfehlen": 1,
+          "sie": 1,
+          "danke": 2,
+          "für": 2,
+          "deine": 1,
+          "hilfe": 1,
+          "ist": 2,
+          "der": 1,
+          "unterschied": 1,
+          "zwischen": 1,
+          "einem": 4,
+          "croissant": 2,
+          "und": 1,
+          "hörnchen": 2,
+          "hat": 1,
+          "einen": 1,
+          "flaumigen": 1,
+          "blättrigen": 1,
+          "teig": 2,
+          "während": 1,
+          "aus": 1,
+          "engerollten": 1,
+          "hergestellt": 1,
+          "wird": 1,
+          "wäre": 1,
+          "mit": 1,
+          "gebäck": 3,
+          "das": 2,
+          "eine": 1,
+          "gute": 1,
+          "wahl": 1,
+          "sind": 1,
+          "möchtest": 1,
+          "du": 1,
+          "noch": 1,
+          "etwas": 1,
+          "nein": 1,
+          "nur": 1
+        }
+      },
+      "total_unique_words": 94,
+      "total_words": 154
+    }
+  },
+  {
+    "timestamp": "2025-10-28T17:20:19.613048",
+    "model_used": "LeoLM/leo-hessianai-70b-chat",
+    "ai_behavior_commands": {
+      "stutter_ai_system_prompt": "<|im_start|>system\nDu bist ein Kunde in einer Bäckerei mit leichtem Stottern. Du sprichst natürlich und authentisch.\nWICHTIGE REGELN:\n- Antworte kurz (1-2 Sätze)\n- Stelle maximal EINE Frage pro Antwort\n- Bleibe im Bäckerei-Kontext\n- Verwende natürliches, gesprochenes Deutsch\n- Zeiche Stottern nur bei einigen Wörtern (ca. 15%)\n- Verwende nur Euro, keine Dollar<|im_end|>\n",
+      "normal_ai_system_prompt": "<|im_start|>system\nDu bist ein freundlicher Bäcker in einer deutschen Bäckerei. Du bedienst Kunden an der Theke.\nWICHTIGE REGELN:\n- Antworte kurz (1-2 Sätze) \n- Stelle maximal EINE Frage pro Antwort\n- Bleibe im Bäckerei-Kontext\n- Sei hilfsbereit und professionell\n- Verwende nur Euro, keine Dollar\n- Empfehle Backwaren, stelle Fragen zu Allergien oder Präferenzen<|im_end|>\n"
+    },
+    "parameters": {
+      "stutter_probability": 0.15,
+      "max_new_tokens": 80,
+      "temperature": 0.7,
+      "top_p": 0.9,
+      "repetition_penalty": 1.1,
+      "conversation_rounds": 7,
+      "context_window": 3
+    },
+    "system_info": {
+      "pytorch_version": "2.9.0+cu128",
+      "cuda_available": true,
+      "gpu_name": "NVIDIA H200",
+      "gpu_memory_gb": 139.8
+    },
+    "stutter_statistics": {
+      "total_words": 65,
+      "stuttered_words": 8,
+      "stutter_rate": 12.307692307692308,
+      "stutter_types": {
+        "partial": 2,
+        "repeat": 4,
+        "block": 2
+      },
+      "stutter_patterns": [
+        "partial_Si",
+        "partial_b",
+        "repeat_S",
+        "block",
+        "repeat_V",
+        "repeat_G",
+        "block",
+        "repeat_B"
+      ]
+    },
+    "conversation_metrics": {
+      "total_messages": 16,
+      "average_response_length": 11.1875,
+      "response_times": [
+        3.698946952819824,
+        4.591519594192505,
+        11.224701642990112,
+        12.847469568252563,
+        2.496452569961548,
+        11.82192873954773,
+        12.720481157302856,
+        6.238373756408691,
+        3.4121296405792236,
+        12.541852712631226,
+        2.163306951522827,
+        6.545465469360352,
+        3.6399319171905518,
+        4.7366790771484375,
+        2.9189651012420654
+      ],
+      "conversation_duration": 101.91215372085571,
+      "average_response_time": 6.773213656743367,
+      "min_response_length": 6,
+      "max_response_length": 26
+    },
+    "conversation_data": [
+      {
+        "round": 1,
+        "speaker": "normal_ai",
+        "message": "Guten Morgen! Was hätten Sie gerne?",
+        "clean_message": "Guten Morgen! Was hätten Sie gerne?",
+        "evaluation_metrics": {
+          "context_relevance": 0.5,
+          "role_consistency": 0.5,
+          "overall_score": 0.5
+        }
+      },
+      {
+        "round": 2,
+        "speaker": "stuttering_ai",
+        "message": "G-Guten Morgen. Ich hätte gern ein Croissant.",
+        "clean_message": "G-Guten Morgen. Ich hätte gern ein Croissant.",
+        "evaluation_metrics": {
+          "context_relevance": 0.8749769926071167,
+          "role_consistency": 1.0,
+          "overall_score": 0.9374884963035583
+        }
+      },
+      {
+        "round": 3,
+        "speaker": "normal_ai",
+        "message": "G-Guten Morgen. Ein leckeres Croissant für Sie.",
+        "clean_message": "G-Guten Morgen. Ein leckeres Croissant für Sie.",
+        "evaluation_metrics": {
+          "context_relevance": 1.0,
+          "role_consistency": 0.9268776893615722,
+          "overall_score": 0.9634388446807861
+        }
+      },
+      {
+        "round": 4,
+        "speaker": "stuttering_ai",
+        "message": "Darf ich fragen, welches Croissant Si... Sie meinen.",
+        "clean_message": "Darf ich fragen, welches Croissant Sie meinen.",
+        "evaluation_metrics": {
+          "context_relevance": 0.9507929563522338,
+          "role_consistency": 0.9376136457920075,
+          "overall_score": 0.9442033010721207
+        }
+      },
+      {
+        "round": 5,
+        "speaker": "normal_ai",
+        "message": "Entschuldigung, bitte wählen Sie eine passende Antwort aus den folgenden Optionen aus: A. \"Das ist leider nicht möglich.",
+        "clean_message": "Entschuldigung, bitte wählen Sie eine passende Antwort aus den folgenden Optionen aus: A. \"Das ist leider nicht möglich.",
+        "evaluation_metrics": {
+          "context_relevance": 0.3878562211990356,
+          "role_consistency": 0.7965753650665283,
+          "overall_score": 0.5922157931327819
+        }
+      },
+      {
+        "round": 6,
+        "speaker": "stuttering_ai",
+        "message": "A. \"Das ist leider nicht möglich.",
+        "clean_message": "A. \"Das ist leider nicht möglich.",
+        "evaluation_metrics": {
+          "context_relevance": 0.9090474128723144,
+          "role_consistency": 0.66256532818079,
+          "overall_score": 0.7858063705265521
+        }
+      },
+      {
+        "round": 7,
+        "speaker": "normal_ai",
+        "message": "Es tut mir leid, das ist leider nicht möglich. Ich kann Ihnen jedoch eine Auswahl unserer köstlichen deutschen Gebäckstücke zeigen, die Sie gegen Bargeld eintauschen können.",
+        "clean_message": "Es tut mir leid, das ist leider nicht möglich. Ich kann Ihnen jedoch eine Auswahl unserer köstlichen deutschen Gebäckstücke zeigen, die Sie gegen Bargeld eintauschen können.",
+        "evaluation_metrics": {
+          "context_relevance": 0.28421219587326046,
+          "role_consistency": 1.0,
+          "overall_score": 0.6421060979366302
+        }
+      },
+      {
+        "round": 8,
+        "speaker": "stuttering_ai",
+        "message": "Entschuldigung, könnten Sie b... bitte wiederholen, was Sie gerade gesagt haben. Klar doch.",
+        "clean_message": "Entschuldigung, könnten Sie bitte wiederholen, was Sie gerade gesagt haben. Klar doch.",
+        "evaluation_metrics": {
+          "context_relevance": 0.41150125265121457,
+          "role_consistency": 0.8120180857181548,
+          "overall_score": 0.6117596691846847
+        }
+      },
+      {
+        "round": 9,
+        "speaker": "normal_ai",
+        "message": "Es tut mir leid, ich habe das nicht verstanden. Können Sie es bitte wiederholen oder umformulieren.",
+        "clean_message": "Es tut mir leid, ich habe das nicht verstanden. Können Sie es bitte wiederholen oder umformulieren.",
+        "evaluation_metrics": {
+          "context_relevance": 0.979348611831665,
+          "role_consistency": 0.7213615894317627,
+          "overall_score": 0.8503551006317138
+        }
+      },
+      {
+        "round": 10,
+        "speaker": "stuttering_ai",
+        "message": "Gerne, welche Waren haben S-S-Sie heute zum ... Kauf zur V-V-Verfügung?",
+        "clean_message": "Gerne, welche Waren haben Sie heute zum Kauf zur Verfügung?",
+        "evaluation_metrics": {
+          "context_relevance": 0.2442422032356262,
+          "role_consistency": 0.9215280818939209,
+          "overall_score": 0.5828851425647735
+        }
+      },
+      {
+        "round": 11,
+        "speaker": "normal_ai",
+        "message": "In unserer Bäckerei haben wir eine große Auswahl an frischen Backwaren.",
+        "clean_message": "In unserer Bäckerei haben wir eine große Auswahl an frischen Backwaren.",
+        "evaluation_metrics": {
+          "context_relevance": 0.6215502977371216,
+          "role_consistency": 1.0,
+          "overall_score": 0.8107751488685608
+        }
+      },
+      {
+        "round": 12,
+        "speaker": "stuttering_ai",
+        "message": "Welche Art von G-G-Gebäck haben ... Sie?",
+        "clean_message": "Welche Art von Gebäck haben Sie?",
+        "evaluation_metrics": {
+          "context_relevance": 0.31320029497146606,
+          "role_consistency": 1.0,
+          "overall_score": 0.656600147485733
+        }
+      },
+      {
+        "round": 13,
+        "speaker": "normal_ai",
+        "message": "Haben Sie Interesse an süßen oder herzhaften Gebäcken. Ich habe frische Brezeln, die gerade aus dem Ofen gekommen sind.",
+        "clean_message": "Haben Sie Interesse an süßen oder herzhaften Gebäcken. Ich habe frische Brezeln, die gerade aus dem Ofen gekommen sind.",
+        "evaluation_metrics": {
+          "context_relevance": 0.822215723991394,
+          "role_consistency": 1.0,
+          "overall_score": 0.9111078619956969
+        }
+      },
+      {
+        "round": 14,
+        "speaker": "stuttering_ai",
+        "message": "Ja, ich hätte gerne eine B-B-Brezel. Wie viel kostet sie.",
+        "clean_message": "Ja, ich hätte gerne eine Brezel. Wie viel kostet sie.",
+        "evaluation_metrics": {
+          "context_relevance": 0.5235482454299927,
+          "role_consistency": 0.9719515907764434,
+          "overall_score": 0.7477499181032181
+        }
+      },
+      {
+        "round": 15,
+        "speaker": "normal_ai",
+        "message": "Eine Brezel kostet €2,50. Möchten Sie etwas zum Trinken dazu bestellen.",
+        "clean_message": "Eine Brezel kostet €2,50. Möchten Sie etwas zum Trinken dazu bestellen.",
+        "evaluation_metrics": {
+          "context_relevance": 0.724024772644043,
+          "role_consistency": 0.9325110387802125,
+          "overall_score": 0.8282679057121277
+        }
+      },
+      {
+        "round": 16,
+        "speaker": "stuttering_ai",
+        "message": "Ja, bitte. Was haben Sie zum Trinken.",
+        "clean_message": "Ja, bitte. Was haben Sie zum Trinken.",
+        "evaluation_metrics": {
+          "context_relevance": 0.7810438156127929,
+          "role_consistency": 0.8362459969520569,
+          "overall_score": 0.8086449062824249
+        }
+      }
+    ],
+    "model_load_time_seconds": 104.06,
+    "evaluation_metrics": {
+      "average_context_relevance": 0.6454725623130799,
+      "average_role_consistency": 0.8762030257470905,
+      "overall_conversation_quality": 0.7608377940300852,
+      "total_evaluated_messages": 16
+    },
+    "top_word_embeddings": {
+      "top_words_analysis": [
+        {
+          "word": "sie",
+          "count": 14,
+          "top_similar_words": [
+            {
+              "word": "ich",
+              "count": 6,
+              "similarity": 0.9801115989685059
+            },
+            {
+              "word": "das",
+              "count": 4,
+              "similarity": 0.9468400478363037
+            },
+            {
+              "word": "eine",
+              "count": 5,
+              "similarity": 0.89240962266922
+            }
+          ]
+        },
+        {
+          "word": "ich",
+          "count": 6,
+          "top_similar_words": [
+            {
+              "word": "sie",
+              "count": 14,
+              "similarity": 0.9801115989685059
+            },
+            {
+              "word": "das",
+              "count": 4,
+              "similarity": 0.9485395550727844
+            },
+            {
+              "word": "eine",
+              "count": 5,
+              "similarity": 0.8963162899017334
+            }
+          ]
+        },
+        {
+          "word": "haben",
+          "count": 6,
+          "top_similar_words": [
+            {
+              "word": "ich",
+              "count": 6,
+              "similarity": 0.8893811702728271
+            },
+            {
+              "word": "sie",
+              "count": 14,
+              "similarity": 0.8887152075767517
+            },
+            {
+              "word": "bitte",
+              "count": 4,
+              "similarity": 0.8367245197296143
+            }
+          ]
+        },
+        {
+          "word": "eine",
+          "count": 5,
+          "top_similar_words": [
+            {
+              "word": "ich",
+              "count": 6,
+              "similarity": 0.8963162899017334
+            },
+            {
+              "word": "sie",
+              "count": 14,
+              "similarity": 0.89240962266922
+            },
+            {
+              "word": "das",
+              "count": 4,
+              "similarity": 0.8912389278411865
+            }
+          ]
+        },
+        {
+          "word": "bitte",
+          "count": 4,
+          "top_similar_words": [
+            {
+              "word": "sie",
+              "count": 14,
+              "similarity": 0.8849160671234131
+            },
+            {
+              "word": "ich",
+              "count": 6,
+              "similarity": 0.8653982877731323
+            },
+            {
+              "word": "haben",
+              "count": 6,
+              "similarity": 0.8367245197296143
+            }
+          ]
+        },
+        {
+          "word": "das",
+          "count": 4,
+          "top_similar_words": [
+            {
+              "word": "ich",
+              "count": 6,
+              "similarity": 0.9485395550727844
+            },
+            {
+              "word": "sie",
+              "count": 14,
+              "similarity": 0.9468400478363037
+            },
+            {
+              "word": "eine",
+              "count": 5,
+              "similarity": 0.8912389278411865
+            }
+          ]
+        },
+        {
+          "word": "nicht",
+          "count": 4,
+          "top_similar_words": [
+            {
+              "word": "haben",
+              "count": 6,
+              "similarity": 0.7597159743309021
+            },
+            {
+              "word": "bitte",
+              "count": 4,
+              "similarity": 0.754163384437561
+            },
+            {
+              "word": "ich",
+              "count": 6,
+              "similarity": 0.7478442788124084
+            }
+          ]
+        },
+        {
+          "word": "guten",
+          "count": 3,
+          "top_similar_words": [
+            {
+              "word": "bitte",
+              "count": 4,
+              "similarity": 0.8078102469444275
+            },
+            {
+              "word": "ich",
+              "count": 6,
+              "similarity": 0.7900778651237488
+            },
+            {
+              "word": "sie",
+              "count": 14,
+              "similarity": 0.7877731919288635
+            }
+          ]
+        },
+        {
+          "word": "morgen",
+          "count": 3,
+          "top_similar_words": [
+            {
+              "word": "bitte",
+              "count": 4,
+              "similarity": 0.6608649492263794
+            },
+            {
+              "word": "sie",
+              "count": 14,
+              "similarity": 0.6034979820251465
+            },
+            {
+              "word": "guten",
+              "count": 3,
+              "similarity": 0.5858504176139832
+            }
+          ]
+        },
+        {
+          "word": "was",
+          "count": 3,
+          "top_similar_words": [
+            {
+              "word": "haben",
+              "count": 6,
+              "similarity": 0.8176616430282593
+            },
+            {
+              "word": "sie",
+              "count": 14,
+              "similarity": 0.7942785024642944
+            },
+            {
+              "word": "ich",
+              "count": 6,
+              "similarity": 0.7903887033462524
+            }
+          ]
+        }
+      ],
+      "total_words_analyzed": 10
+    },
+    "complete_vocabulary": {
+      "all_words": {
+        "guten": 3,
+        "morgen": 3,
+        "was": 3,
+        "hätten": 1,
+        "sie": 14,
+        "gerne": 3,
+        "g": 2,
+        "ich": 6,
+        "hätte": 2,
+        "gern": 1,
+        "ein": 2,
+        "croissant": 3,
+        "leckeres": 1,
+        "für": 1,
+        "darf": 1,
+        "fragen": 1,
+        "welches": 1,
+        "meinen": 1,
+        "entschuldigung": 2,
+        "bitte": 4,
+        "wählen": 1,
+        "eine": 5,
+        "passende": 1,
+        "antwort": 1,
+        "aus": 3,
+        "den": 1,
+        "folgenden": 1,
+        "optionen": 1,
+        "a": 2,
+        "das": 4,
+        "ist": 3,
+        "leider": 3,
+        "nicht": 4,
+        "möglich": 3,
+        "es": 3,
+        "tut": 2,
+        "mir": 2,
+        "leid": 2,
+        "kann": 1,
+        "ihnen": 1,
+        "jedoch": 1,
+        "auswahl": 2,
+        "unserer": 2,
+        "köstlichen": 1,
+        "deutschen": 1,
+        "gebäckstücke": 1,
+        "zeigen": 1,
+        "die": 2,
+        "gegen": 1,
+        "bargeld": 1,
+        "eintauschen": 1,
+        "können": 2,
+        "könnten": 1,
+        "wiederholen": 2,
+        "gerade": 2,
+        "gesagt": 1,
+        "haben": 6,
+        "klar": 1,
+        "doch": 1,
+        "habe": 2,
+        "verstanden": 1,
+        "oder": 2,
+        "umformulieren": 1,
+        "welche": 2,
+        "waren": 1,
+        "heute": 1,
+        "zum": 3,
+        "kauf": 1,
+        "zur": 1,
+        "verfügung": 1,
+        "in": 1,
+        "bäckerei": 1,
+        "wir": 1,
+        "große": 1,
+        "an": 2,
+        "frischen": 1,
+        "backwaren": 1,
+        "art": 1,
+        "von": 1,
+        "gebäck": 1,
+        "interesse": 1,
+        "süßen": 1,
+        "herzhaften": 1,
+        "gebäcken": 1,
+        "frische": 1,
+        "brezeln": 1,
+        "dem": 1,
+        "ofen": 1,
+        "gekommen": 1,
+        "sind": 1,
+        "ja": 2,
+        "brezel": 2,
+        "wie": 1,
+        "viel": 1,
+        "kostet": 2,
+        "möchten": 1,
+        "etwas": 1,
+        "trinken": 2,
+        "dazu": 1,
+        "bestellen": 1
+      },
+      "by_speaker": {
+        "baecker": {
+          "guten": 2,
+          "morgen": 2,
+          "was": 1,
+          "hätten": 1,
+          "sie": 7,
+          "gerne": 1,
+          "g": 1,
+          "ein": 1,
+          "leckeres": 1,
+          "croissant": 1,
+          "für": 1,
+          "entschuldigung": 1,
+          "bitte": 2,
+          "wählen": 1,
+          "eine": 4,
+          "passende": 1,
+          "antwort": 1,
+          "aus": 3,
+          "den": 1,
+          "folgenden": 1,
+          "optionen": 1,
+          "a": 1,
+          "das": 3,
+          "ist": 2,
+          "leider": 2,
+          "nicht": 3,
+          "möglich": 2,
+          "es": 3,
+          "tut": 2,
+          "mir": 2,
+          "leid": 2,
+          "ich": 3,
+          "kann": 1,
+          "ihnen": 1,
+          "jedoch": 1,
+          "auswahl": 2,
+          "unserer": 2,
+          "köstlichen": 1,
+          "deutschen": 1,
+          "gebäckstücke": 1,
+          "zeigen": 1,
+          "die": 2,
+          "gegen": 1,
+          "bargeld": 1,
+          "eintauschen": 1,
+          "können": 2,
+          "habe": 2,
+          "verstanden": 1,
+          "wiederholen": 1,
+          "oder": 2,
+          "umformulieren": 1,
+          "in": 1,
+          "bäckerei": 1,
+          "haben": 2,
+          "wir": 1,
+          "große": 1,
+          "an": 2,
+          "frischen": 1,
+          "backwaren": 1,
+          "interesse": 1,
+          "süßen": 1,
+          "herzhaften": 1,
+          "gebäcken": 1,
+          "frische": 1,
+          "brezeln": 1,
+          "gerade": 1,
+          "dem": 1,
+          "ofen": 1,
+          "gekommen": 1,
+          "sind": 1,
+          "brezel": 1,
+          "kostet": 1,
+          "möchten": 1,
+          "etwas": 1,
+          "zum": 1,
+          "trinken": 1,
+          "dazu": 1,
+          "bestellen": 1
+        },
+        "kunde": {
+          "g": 1,
+          "guten": 1,
+          "morgen": 1,
+          "ich": 3,
+          "hätte": 2,
+          "gern": 1,
+          "ein": 1,
+          "croissant": 2,
+          "darf": 1,
+          "fragen": 1,
+          "welches": 1,
+          "sie": 7,
+          "meinen": 1,
+          "a": 1,
+          "das": 1,
+          "ist": 1,
+          "leider": 1,
+          "nicht": 1,
+          "möglich": 1,
+          "entschuldigung": 1,
+          "könnten": 1,
+          "bitte": 2,
+          "wiederholen": 1,
+          "was": 2,
+          "gerade": 1,
+          "gesagt": 1,
+          "haben": 4,
+          "klar": 1,
+          "doch": 1,
+          "gerne": 2,
+          "welche": 2,
+          "waren": 1,
+          "heute": 1,
+          "zum": 2,
+          "kauf": 1,
+          "zur": 1,
+          "verfügung": 1,
+          "art": 1,
+          "von": 1,
+          "gebäck": 1,
+          "ja": 2,
+          "eine": 1,
+          "brezel": 1,
+          "wie": 1,
+          "viel": 1,
+          "kostet": 1,
+          "trinken": 1
+        }
+      },
+      "total_unique_words": 100,
+      "total_words": 180
+    }
+  },
+  {
+    "timestamp": "2025-10-28T17:32:02.240940",
+    "model_used": "LeoLM/leo-hessianai-70b-chat",
+    "ai_behavior_commands": {
+      "stutter_ai_system_prompt": "<|im_start|>system\nDu bist ein interessierter Kunde in einer Bäckerei mit leichtem Stottern. Du sprichst mit dem Bäcker. Antworte auf die Frage des Bäckers und stelle danach eine Frage. Spreche maximal drei Sätze. Stelle Maximal eine Frage am Ende.<|im_end|>\n",
+      "normal_ai_system_prompt": "<|im_start|>system\nDu bist ein Bäcker in einer Bäckerei. Du bedienst Kunden an der Theke. Antworte auf die Frage des Kunden und stelle danach eine Frage, um den Kunden besser zu beraten. Spreche maximal drei Sätze.<|im_end|>\n"
+    },
+    "parameters": {
+      "stutter_probability": 0.15,
+      "max_new_tokens": 120,
+      "temperature": 0.8,
+      "top_p": 0.9,
+      "repetition_penalty": 1.1,
+      "conversation_rounds": 4,
+      "context_window": 3
+    },
+    "system_info": {
+      "pytorch_version": "2.9.0+cu128",
+      "cuda_available": true,
+      "gpu_name": "NVIDIA H200",
+      "gpu_memory_gb": 139.8
+    },
+    "stutter_statistics": {
+      "total_words": 53,
+      "stuttered_words": 7,
+      "stutter_rate": 13.21,
+      "stutter_types": {
+        "partial": 1,
+        "repeat": 4,
+        "block": 2
+      },
+      "stutter_patterns": [
+        "partial_A",
+        "repeat_n",
+        "repeat_e",
+        "repeat_o",
+        "block",
+        "block",
+        "repeat_i"
+      ]
+    },
+    "conversation_metrics": {
+      "total_messages": 10,
+      "average_response_length": 0,
+      "response_times": [
+        4.77666974067688,
+        7.9760825634002686,
+        6.411519289016724,
+        7.303150653839111,
+        4.537803411483765,
+        6.432838439941406,
+        4.14604640007019,
+        17.607232332229614,
+        2.4456958770751953
+      ],
+      "conversation_duration": 61.85
+    },
+    "conversation_data": [
+      {
+        "round": 1,
+        "speaker": "normal_ai",
+        "message": "Guten Morgen! Was hätten Sie gerne?",
+        "clean_message": "Guten Morgen! Was hätten Sie gerne?",
+        "evaluation_metrics": {
+          "context_relevance": 0.5,
+          "role_consistency": 0.5,
+          "overall_score": 0.5
+        }
+      },
+      {
+        "round": 2,
+        "speaker": "stuttering_ai",
+        "message": "Ich würde gerne etwas Gebäck kaufen. Welche A... Art von Gebäck haben Sie heute?",
+        "clean_message": "Ich würde gerne etwas Gebäck kaufen. Welche Art von Gebäck haben Sie heute?",
+        "evaluation_metrics": {
+          "context_relevance": 0.657,
+          "role_consistency": 1.0,
+          "overall_score": 0.828
+        }
+      },
+      {
+        "round": 3,
+        "speaker": "normal_ai",
+        "message": "Klar! Wir haben verschiedene Arten von Gebäck, darunter Croissants, Muffins, Donuts und Bagels. An welchem sind Sie interessiert? Wie viele möchten Sie kaufen?",
+        "clean_message": "Klar! Wir haben verschiedene Arten von Gebäck, darunter Croissants, Muffins, Donuts und Bagels. An welchem sind Sie interessiert? Wie viele möchten Sie kaufen?",
+        "evaluation_metrics": {
+          "context_relevance": 0.94,
+          "role_consistency": 1.0,
+          "overall_score": 0.97
+        }
+      },
+      {
+        "round": 4,
+        "speaker": "stuttering_ai",
+        "message": "Entschuldigung, ich meinte n-n-natürlich \"Welches\". Welches Gebäck e-e-empfehlen Sie für jemanden, der Schokolade mag?",
+        "clean_message": "Entschuldigung, ich meinte natürlich \"Welches\". Welches Gebäck empfehlen Sie für jemanden, der Schokolade mag?",
+        "evaluation_metrics": {
+          "context_relevance": 0.81,
+          "role_consistency": 1.0,
+          "overall_score": 0.905
+        }
+      },
+      {
+        "round": 5,
+        "speaker": "normal_ai",
+        "message": "Großartig! Hier sind unsere beliebtesten Optionen mit Schokolade. Möchten Sie lieber etwas mit dunkler oder milchiger Schokolade?",
+        "clean_message": "Großartig! Hier sind unsere beliebtesten Optionen mit Schokolade. Möchten Sie lieber etwas mit dunkler oder milchiger Schokolade?",
+        "evaluation_metrics": {
+          "context_relevance": 1.0,
+          "role_consistency": 1.0,
+          "overall_score": 1.0
+        }
+      },
+      {
+        "round": 6,
+        "speaker": "stuttering_ai",
+        "message": "Bist du an weiteren Geschmacksrichtungen interessiert, wie vielleicht Karamell o-o-oder Früchte?",
+        "clean_message": "Bist du an weiteren Geschmacksrichtungen interessiert, wie vielleicht Karamell oder Früchte?",
+        "evaluation_metrics": {
+          "context_relevance": 0.692,
+          "role_consistency": 0.858,
+          "overall_score": 0.775
+        }
+      },
+      {
+        "round": 7,
+        "speaker": "normal_ai",
+        "message": "Welche Art von Gebäck bevorzugen Sie? Haben Sie Allergien oder Diätbeschränkungen, über die ich Bescheid wissen sollte?",
+        "clean_message": "Welche Art von Gebäck bevorzugen Sie? Haben Sie Allergien oder Diätbeschränkungen, über die ich Bescheid wissen sollte?",
+        "evaluation_metrics": {
+          "context_relevance": 0.69,
+          "role_consistency": 1.0,
+          "overall_score": 0.845
+        }
+      },
+      {
+        "round": 8,
+        "speaker": "stuttering_ai",
+        "message": "Ja, ich habe eine ... Glutenallergie. Welche ... glutenfreien Optionen haben Sie?",
+        "clean_message": "Ja, ich habe eine Glutenallergie. Welche glutenfreien Optionen haben Sie?",
+        "evaluation_metrics": {
+          "context_relevance": 0.767,
+          "role_consistency": 1.0,
+          "overall_score": 0.884
+        }
+      },
+      {
+        "round": 9,
+        "speaker": "normal_ai",
+        "message": "In unserer Bäckerei haben wir leider keine explizit als \"glutenfrei\" gekennzeichneten Produkte. Allerdings verwenden wir in unseren traditionellen Backwaren nur natürliche Zutaten ohne zusätzliche Konservierungsstoffe oder Chemikalien, sodass einige unserer Produkte möglicherweise immer noch für Sie verträglich sind. Möchten Sie speziell etwas über unsere Zutaten oder Herstellungsprozesse erfahren?",
+        "clean_message": "In unserer Bäckerei haben wir leider keine explizit als \"glutenfrei\" gekennzeichneten Produkte. Allerdings verwenden wir in unseren traditionellen Backwaren nur natürliche Zutaten ohne zusätzliche Konservierungsstoffe oder Chemikalien, sodass einige unserer Produkte möglicherweise immer noch für Sie verträglich sind. Möchten Sie speziell etwas über unsere Zutaten oder Herstellungsprozesse erfahren?",
+        "evaluation_metrics": {
+          "context_relevance": 0.389,
+          "role_consistency": 1.0,
+          "overall_score": 0.695
+        }
+      },
+      {
+        "round": 10,
+        "speaker": "stuttering_ai",
+        "message": "Nein, i-i-ich glaube nicht. Danke.",
+        "clean_message": "Nein, ich glaube nicht. Danke.",
+        "evaluation_metrics": {
+          "context_relevance": 0.175,
+          "role_consistency": 0.779,
+          "overall_score": 0.477
+        }
+      }
+    ],
+    "model_load_time_seconds": 102.48
+  },
+  {
+    "timestamp": "2025-10-29T12:25:17.916437",
+    "model_used": "LeoLM/leo-hessianai-70b-chat",
+    "ai_behavior_commands": {
+      "stutter_ai_system_prompt": "<|im_start|>system\nDu bist ein interessierter Kunde in einer Bäckerei mit leichtem Stottern. Du sprichst mit dem Bäcker. Antworte auf die Frage des Bäckers und stelle danach eine Frage. Spreche maximal drei Sätze. Stelle Maximal eine Frage am Ende. Du bist nicht der Bäcker!<|im_end|>\n",
+      "normal_ai_system_prompt": "<|im_start|>system\nDu bist ein Bäcker in einer Bäckerei. Du bedienst Kunden an der Theke. Antworte auf die Frage des Kunden und stelle danach eine Frage, um den Kunden besser zu beraten. Spreche maximal drei Sätze.<|im_end|>\n"
+    },
+    "parameters": {
+      "stutter_probability": 0.15,
+      "max_new_tokens": 120,
+      "temperature": 0.7,
+      "top_p": 0.9,
+      "repetition_penalty": 1.1,
+      "context_window": 5
+    },
+    "system_info": {
+      "pytorch_version": "2.9.0+cu128",
+      "cuda_available": true,
+      "gpu_name": "NVIDIA H200",
+      "gpu_memory_gb": 139.8
+    },
+    "stutter_statistics": {
+      "total_words": 113,
+      "stuttered_words": 18,
+      "stutter_rate": 15.93,
+      "stutter_types": {
+        "partial": 6,
+        "repeat": 8,
+        "block": 4
+      },
+      "stutter_patterns": [
+        "partial_We",
+        "repeat_m",
+        "partial_al",
+        "repeat_no",
+        "partial_an",
+        "partial_Ar",
+        "repeat_wü",
+        "repeat_d",
+        "repeat_e",
+        "block",
+        "block",
+        "partial_Ok",
+        "block",
+        "block",
+        "repeat_Da",
+        "partial_ge",
+        "repeat_hi",
+        "repeat_T"
+      ]
+    },
+    "conversation_metrics": {
+      "total_messages": 16,
+      "average_response_length": 0,
+      "response_times": [
+        5.39894700050354,
+        9.852811098098755,
+        7.469850301742554,
+        6.241289854049683,
+        6.407812833786011,
+        15.109764099121094,
+        3.788311004638672,
+        15.482054948806763,
+        3.120394229888916,
+        5.932652473449707,
+        2.804277181625366,
+        6.026017904281616,
+        4.6607301235198975,
+        6.95135760307312,
+        8.256129264831543
+      ],
+      "conversation_duration": 107.81
+    },
+    "conversation_data": [
+      {
+        "round": 1,
+        "speaker": "normal_ai",
+        "message": "Guten Morgen! Was hätten Sie gerne?",
+        "clean_message": "Guten Morgen! Was hätten Sie gerne?",
+        "evaluation_metrics": {
+          "context_relevance": 0.5,
+          "role_consistency": 0.5,
+          "overall_score": 0.5
+        }
+      },
+      {
+        "round": 2,
+        "speaker": "stuttering_ai",
+        "message": "G-g-guten Morgen! Ich würde gerne etwas Brot kaufen. We... Welche Arten haben Sie?",
+        "clean_message": "G-g-guten Morgen! Ich würde gerne etwas Brot kaufen. Welche Arten haben Sie?",
+        "evaluation_metrics": {
+          "context_relevance": 0.657,
+          "role_consistency": 1.0,
+          "overall_score": 0.829
+        }
+      },
+      {
+        "round": 3,
+        "speaker": "normal_ai",
+        "message": "Wir haben verschiedene Arten von frisch gebackenem Brot. Darf ich fragen, welche Art von Brot Sie bevorzugen? Wir haben Weißbrot, Vollkornbrot, Roggenbrot und viele weitere Optionen.",
+        "clean_message": "Wir haben verschiedene Arten von frisch gebackenem Brot. Darf ich fragen, welche Art von Brot Sie bevorzugen? Wir haben Weißbrot, Vollkornbrot, Roggenbrot und viele weitere Optionen.",
+        "evaluation_metrics": {
+          "context_relevance": 0.991,
+          "role_consistency": 0.966,
+          "overall_score": 0.979
+        }
+      },
+      {
+        "round": 4,
+        "speaker": "stuttering_ai",
+        "message": "Ich m-m-mag al... alle Sorten von Ihnen, aber ich hätte gerne etwas anderes als Weißbrot. Gibt es no-no-noch andere empfohlene Optionen für jemanden wie mich?",
+        "clean_message": "Ich mag alle Sorten von Ihnen, aber ich hätte gerne etwas anderes als Weißbrot. Gibt es noch andere empfohlene Optionen für jemanden wie mich?",
+        "evaluation_metrics": {
+          "context_relevance": 0.606,
+          "role_consistency": 1.0,
+          "overall_score": 0.803
+        }
+      },
+      {
+        "round": 5,
+        "speaker": "normal_ai",
+        "message": "Ja, wir haben auch Vollkornbrot, Roggenbrot und Sauerteigbrot. Möchten Sie eine dieser Optionen probieren?",
+        "clean_message": "Ja, wir haben auch Vollkornbrot, Roggenbrot und Sauerteigbrot. Möchten Sie eine dieser Optionen probieren?",
+        "evaluation_metrics": {
+          "context_relevance": 0.632,
+          "role_consistency": 0.988,
+          "overall_score": 0.81
+        }
+      },
+      {
+        "round": 6,
+        "speaker": "stuttering_ai",
+        "message": "Ich hätte gerne etwas Roggenbrot, bitte. Gibt es noch an... andere Ar... Arten von Brot, die ich vielleicht mögen wü-wü-würde?",
+        "clean_message": "Ich hätte gerne etwas Roggenbrot, bitte. Gibt es noch andere Arten von Brot, die ich vielleicht mögen würde?",
+        "evaluation_metrics": {
+          "context_relevance": 0.459,
+          "role_consistency": 1.0,
+          "overall_score": 0.73
+        }
+      },
+      {
+        "round": 7,
+        "speaker": "normal_ai",
+        "message": "Nein, tut mir leid. Wir haben nur das klassische Roggenbrot. Aber wir haben auch Weißbrot, Vollkornbrot und Sauerteigbrot. Wenn Sie möchten, kann ich Ihnen mehr darüber erzählen. Haben Sie irgendwelche diätetischen Einschränkungen oder Vorlieben, über die ich Bescheid wissen sollte?",
+        "clean_message": "Nein, tut mir leid. Wir haben nur das klassische Roggenbrot. Aber wir haben auch Weißbrot, Vollkornbrot und Sauerteigbrot. Wenn Sie möchten, kann ich Ihnen mehr darüber erzählen. Haben Sie irgendwelche diätetischen Einschränkungen oder Vorlieben, über die ich Bescheid wissen sollte?",
+        "evaluation_metrics": {
+          "context_relevance": 0.477,
+          "role_consistency": 0.95,
+          "overall_score": 0.714
+        }
+      },
+      {
+        "round": 8,
+        "speaker": "stuttering_ai",
+        "message": "Kannst du mir mehr über d-d-das Sauerteigbrot e-e-erzählen?",
+        "clean_message": "Kannst du mir mehr über das Sauerteigbrot erzählen?",
+        "evaluation_metrics": {
+          "context_relevance": 0.599,
+          "role_consistency": 0.814,
+          "overall_score": 0.707
+        }
+      },
+      {
+        "round": 9,
+        "speaker": "normal_ai",
+        "message": "Ja, unser Sauerteigbrot ist ein köstliches handwerkliches Brot, das mit einer Mischung aus Vollkornmehl, Sauerteigkultur und warmem Wasser hergestellt wird. Es hat einen kräftigen Geschmack mit einer chewy Kruste außen und einem weichen Inneren. Gibt es noch etwas Bestimmtes, das du wissen möchtest?",
+        "clean_message": "Ja, unser Sauerteigbrot ist ein köstliches handwerkliches Brot, das mit einer Mischung aus Vollkornmehl, Sauerteigkultur und warmem Wasser hergestellt wird. Es hat einen kräftigen Geschmack mit einer chewy Kruste außen und einem weichen Inneren. Gibt es noch etwas Bestimmtes, das du wissen möchtest?",
+        "evaluation_metrics": {
+          "context_relevance": 0.549,
+          "role_consistency": 0.972,
+          "overall_score": 0.761
+        }
+      },
+      {
+        "round": 10,
+        "speaker": "stuttering_ai",
+        "message": "... Wie lange dauert es, ... dieses Brot zu machen?",
+        "clean_message": "Wie lange dauert es, dieses Brot zu machen?",
+        "evaluation_metrics": {
+          "context_relevance": 0.627,
+          "role_consistency": 0.866,
+          "overall_score": 0.747
+        }
+      },
+      {
+        "round": 11,
+        "speaker": "normal_ai",
+        "message": "Die Zubereitungszeit für das Brot beträgt etwa 30 Minuten. Möchten Sie noch etwas anderes dazu bestellen?",
+        "clean_message": "Die Zubereitungszeit für das Brot beträgt etwa 30 Minuten. Möchten Sie noch etwas anderes dazu bestellen?",
+        "evaluation_metrics": {
+          "context_relevance": 0.893,
+          "role_consistency": 0.988,
+          "overall_score": 0.94
+        }
+      },
+      {
+        "round": 12,
+        "speaker": "stuttering_ai",
+        "message": "Ja, bitte. Wie viel wird es kosten?",
+        "clean_message": "Ja, bitte. Wie viel wird es kosten?",
+        "evaluation_metrics": {
+          "context_relevance": 0.387,
+          "role_consistency": 0.943,
+          "overall_score": 0.665
+        }
+      },
+      {
+        "round": 13,
+        "speaker": "normal_ai",
+        "message": "Die Bestellung ist für zwei Torten, richtig? Das macht insgesamt $60$. Möchten Sie bar oder mit Karte zahlen?",
+        "clean_message": "Die Bestellung ist für zwei Torten, richtig? Das macht insgesamt $60$. Möchten Sie bar oder mit Karte zahlen?",
+        "evaluation_metrics": {
+          "context_relevance": 0.679,
+          "role_consistency": 0.986,
+          "overall_score": 0.832
+        }
+      },
+      {
+        "round": 14,
+        "speaker": "stuttering_ai",
+        "message": "Ok... Okay, ich werde ... bar zahlen. Gibt es heute irgendwelche ... Sonderangebote?",
+        "clean_message": "Okay, ich werde bar zahlen. Gibt es heute irgendwelche Sonderangebote?",
+        "evaluation_metrics": {
+          "context_relevance": 0.765,
+          "role_consistency": 0.838,
+          "overall_score": 0.802
+        }
+      },
+      {
+        "round": 15,
+        "speaker": "normal_ai",
+        "message": "Nein, leider nicht. Hier ist Ihr Kassenzettel. Danke, dass Sie bei uns eingekauft haben! Haben Sie einen schönen Tag.",
+        "clean_message": "Nein, leider nicht. Hier ist Ihr Kassenzettel. Danke, dass Sie bei uns eingekauft haben! Haben Sie einen schönen Tag.",
+        "evaluation_metrics": {
+          "context_relevance": 0.723,
+          "role_consistency": 0.869,
+          "overall_score": 0.796
+        }
+      },
+      {
+        "round": 16,
+        "speaker": "stuttering_ai",
+        "message": "Vielen Da-Da-Dank für Ihre Hilfe. Ich habe mich sehr darüber ge... gefreut, hi-hi-hierher zu kommen und einkaufen. Vielen Dank noch einmal und einen wunderbaren T-T-Tag für Sie!",
+        "clean_message": "Vielen Dank für Ihre Hilfe. Ich habe mich sehr darüber gefreut, hierher zu kommen und einkaufen. Vielen Dank noch einmal und einen wunderbaren Tag für Sie!",
+        "evaluation_metrics": {
+          "context_relevance": 0.884,
+          "role_consistency": 0.688,
+          "overall_score": 0.786
+        }
+      }
+    ],
+    "model_load_time_seconds": 104.86
   }
 ]

@@ -21,6 +21,10 @@
       --processing-color: #e3f2fd;
       --context-color: #e8f5e8;
       --role-color: #fff0e8;
+      --favorite-color: #ffc107;
+      --archive-color: #6c757d;
+      --embedding-color: #e8f0fe;
+      --vocabulary-color: #f0e8ff;
     }
 
     body {
@@ -274,7 +278,7 @@
     /* Kachel-Grid */
     .conversation-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 1.25rem;
       margin-bottom: 2rem;
     }
@@ -309,6 +313,17 @@
 
     .conversation-tile:not(.hidden) {
       display: block;
+    }
+
+    .conversation-tile.favorite {
+      border-left-color: var(--favorite-color);
+      background: #fffcf0;
+    }
+
+    .conversation-tile.archived {
+      border-left-color: var(--archive-color);
+      background: #f8f9fa;
+      opacity: 0.8;
     }
 
     .conversation-tile h3 {
@@ -608,7 +623,7 @@
 
     .tile-stats {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 0.5rem;
       margin: 0.75rem 0;
     }
@@ -809,6 +824,11 @@
       background: var(--role-color);
     }
 
+    .evaluation-card.overall {
+      border-left-color: #6f42c1;
+      background: #f0e8ff;
+    }
+
     .evaluation-value {
       font-size: 1.8rem;
       font-weight: 700;
@@ -823,6 +843,10 @@
 
     .evaluation-card.role .evaluation-value {
       color: var(--secondary-color);
+    }
+
+    .evaluation-card.overall .evaluation-value {
+      color: #6f42c1;
     }
 
     .evaluation-label {
@@ -885,9 +909,184 @@
       color: var(--secondary-color);
     }
 
+    .evaluation-score.overall {
+      background: rgba(111, 66, 193, 0.1);
+      color: #6f42c1;
+    }
+
     .evaluation-message-content {
       font-size: 0.85rem;
       line-height: 1.4;
+    }
+
+    /* Word Embeddings Styles */
+    .embedding-analysis {
+      background: var(--embedding-color);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-left: 4px solid #6f42c1;
+    }
+
+    .word-embedding-item {
+      background: white;
+      border-radius: 6px;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .word-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .word-title {
+      font-weight: 700;
+      color: #6f42c1;
+      font-size: 1rem;
+    }
+
+    .word-count {
+      background: rgba(111, 66, 193, 0.1);
+      color: #6f42c1;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .similar-words {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .similar-word {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 4px;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.8rem;
+    }
+
+    .similar-word .word {
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    .similar-word .similarity {
+      color: var(--text-light);
+      font-size: 0.75rem;
+      margin-left: 0.3rem;
+    }
+
+    /* Vocabulary Stats Styles */
+    .vocabulary-stats {
+      background: var(--vocabulary-color);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-left: 4px solid #20c997;
+    }
+
+    .vocabulary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .vocabulary-card {
+      background: white;
+      border-radius: 6px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .vocabulary-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #20c997;
+      margin-bottom: 0.25rem;
+    }
+
+    .vocabulary-label {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    /* Favoriten und Archiv Styles */
+    .tile-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .action-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .favorite-button {
+      color: var(--text-light);
+    }
+
+    .favorite-button.active {
+      color: var(--favorite-color);
+    }
+
+    .archive-button {
+      color: var(--text-light);
+    }
+
+    .archive-button.active {
+      color: var(--archive-color);
+    }
+
+    .action-button:hover {
+      background: rgba(0, 0, 0, 0.05);
+      transform: scale(1.1);
+    }
+
+    .view-selector {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .view-button {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .view-button.active {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
+    .view-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     /* Responsive Design */
@@ -932,8 +1131,12 @@
         font-size: 1.1rem;
       }
       
-      .evaluation-grid {
+      .evaluation-grid, .vocabulary-grid {
         grid-template-columns: 1fr;
+      }
+      
+      .tile-stats {
+        grid-template-columns: 1fr 1fr;
       }
     }
   </style>
@@ -956,11 +1159,12 @@
       </div>
       
       <div class="filter-group">
-        <label class="filter-label">Quantisierung</label>
-        <select class="filter-select" id="filter-quantization">
+        <label class="filter-label">Konversations-Qualität</label>
+        <select class="filter-select" id="filter-quality">
           <option value="">Alle</option>
-          <option value="true">Aktiviert</option>
-          <option value="false">Deaktiviert</option>
+          <option value="high">Hoch (&gt; 0.7)</option>
+          <option value="medium">Mittel (0.4-0.7)</option>
+          <option value="low">Niedrig (&lt; 0.4)</option>
         </select>
       </div>
       
@@ -984,20 +1188,20 @@
         </div>
         
         <div class="slider-group">
-          <label class="filter-label">Stotter-Wahrscheinlichkeit</label>
+          <label class="filter-label">Antwortzeit (s)</label>
           <div class="slider-labels">
             <span>0</span>
-            <span>1.0</span>
+            <span>10</span>
           </div>
           <div class="dual-range-container">
             <div class="dual-range-track"></div>
-            <div class="dual-range-progress" id="stutter-prob-progress"></div>
-            <input type="range" min="0" max="1" step="0.01" value="0" class="dual-range-input" id="filter-stutter-prob-min">
-            <input type="range" min="0" max="1" step="0.01" value="1" class="dual-range-input" id="filter-stutter-prob-max">
+            <div class="dual-range-progress" id="response-time-progress"></div>
+            <input type="range" min="0" max="10" step="0.1" value="0" class="dual-range-input" id="filter-response-time-min">
+            <input type="range" min="0" max="10" step="0.1" value="10" class="dual-range-input" id="filter-response-time-max">
           </div>
           <div class="slider-values">
-            <span class="slider-value" id="stutter-prob-min-value">Von: 0</span>
-            <span class="slider-value" id="stutter-prob-max-value">Bis: 1.0</span>
+            <span class="slider-value" id="response-time-min-value">Von: 0s</span>
+            <span class="slider-value" id="response-time-max-value">Bis: 10s</span>
           </div>
         </div>
       </div>
@@ -1013,6 +1217,13 @@
       </div>
     </div>
 
+    <!-- Ansichts-Auswahl -->
+    <div class="view-selector">
+      <button class="view-button active" onclick="setView('all')">Alle Gespräche</button>
+      <button class="view-button" onclick="setView('favorites')">Favoriten</button>
+      <button class="view-button" onclick="setView('archived')">Archiv</button>
+    </div>
+
     <div id="conversation-grid" class="conversation-grid"></div>
   </div>
 
@@ -1020,6 +1231,85 @@
     let conversationData = [];
     let currentFilters = {};
     let activeConversationIndex = null;
+    let currentView = 'all';
+
+    // Favoriten und Archiv aus localStorage laden
+    function loadFavorites() {
+      const favorites = localStorage.getItem('stutterAnalysisFavorites');
+      return favorites ? JSON.parse(favorites) : {};
+    }
+
+    function loadArchived() {
+      const archived = localStorage.getItem('stutterAnalysisArchived');
+      return archived ? JSON.parse(archived) : {};
+    }
+
+    // Favoriten und Archiv in localStorage speichern
+    function saveFavorites(favorites) {
+      localStorage.setItem('stutterAnalysisFavorites', JSON.stringify(favorites));
+    }
+
+    function saveArchived(archived) {
+      localStorage.setItem('stutterAnalysisArchived', JSON.stringify(archived));
+    }
+
+    // Favorit für eine bestimmte Konversation speichern
+    function toggleFavorite(conversationId) {
+      const favorites = loadFavorites();
+      if (favorites[conversationId]) {
+        delete favorites[conversationId];
+      } else {
+        favorites[conversationId] = true;
+      }
+      saveFavorites(favorites);
+      updateTileAppearance(conversationId);
+    }
+
+    // Archiv für eine bestimmte Konversation speichern
+    function toggleArchive(conversationId) {
+      const archived = loadArchived();
+      if (archived[conversationId]) {
+        delete archived[conversationId];
+      } else {
+        archived[conversationId] = true;
+      }
+      saveArchived(archived);
+      updateTileAppearance(conversationId);
+    }
+
+    // Kachel-Aussehen basierend auf Favoriten/Archiv-Status aktualisieren
+    function updateTileAppearance(conversationId) {
+      const tile = document.querySelector(`.conversation-tile[data-id="${conversationId}"]`);
+      if (!tile) return;
+      
+      const favorites = loadFavorites();
+      const archived = loadArchived();
+      
+      // Entferne alle Status-Klassen
+      tile.classList.remove('favorite', 'archived');
+      
+      // Füge entsprechende Klassen hinzu
+      if (favorites[conversationId]) {
+        tile.classList.add('favorite');
+      }
+      if (archived[conversationId]) {
+        tile.classList.add('archived');
+      }
+      
+      // Aktualisiere die Button-Icons
+      const favoriteButton = tile.querySelector('.favorite-button');
+      const archiveButton = tile.querySelector('.archive-button');
+      
+      if (favoriteButton) {
+        favoriteButton.classList.toggle('active', favorites[conversationId]);
+        favoriteButton.innerHTML = favorites[conversationId] ? '★' : '☆';
+      }
+      
+      if (archiveButton) {
+        archiveButton.classList.toggle('active', archived[conversationId]);
+        archiveButton.innerHTML = archived[conversationId] ? '📁' : '📂';
+      }
+    }
 
     // Notizen aus localStorage laden
     function loadNotes() {
@@ -1104,19 +1394,20 @@
       const stutterRateMinValue = document.getElementById('stutter-rate-min-value');
       const stutterRateMaxValue = document.getElementById('stutter-rate-max-value');
 
-      // Stotter-Wahrscheinlichkeit Slider
-      const stutterProbMin = document.getElementById('filter-stutter-prob-min');
-      const stutterProbMax = document.getElementById('filter-stutter-prob-max');
-      const stutterProbProgress = document.getElementById('stutter-prob-progress');
-      const stutterProbMinValue = document.getElementById('stutter-prob-min-value');
-      const stutterProbMaxValue = document.getElementById('stutter-prob-max-value');
+      // Antwortzeit Slider
+      const responseTimeMin = document.getElementById('filter-response-time-min');
+      const responseTimeMax = document.getElementById('filter-response-time-max');
+      const responseTimeProgress = document.getElementById('response-time-progress');
+      const responseTimeMinValue = document.getElementById('response-time-min-value');
+      const responseTimeMaxValue = document.getElementById('response-time-max-value');
 
       // Funktion zur Aktualisierung des Progress-Balkens
       function updateProgress(min, max, progressElement) {
-        const minVal = parseInt(min.value);
-        const maxVal = parseInt(max.value);
-        progressElement.style.left = (minVal / max.max) * 100 + '%';
-        progressElement.style.right = 100 - (maxVal / max.max) * 100 + '%';
+        const minVal = parseFloat(min.value);
+        const maxVal = parseFloat(max.value);
+        const range = parseFloat(max.max);
+        progressElement.style.left = (minVal / range) * 100 + '%';
+        progressElement.style.right = 100 - (maxVal / range) * 100 + '%';
       }
 
       // Event Listener für Stotterrate
@@ -1146,22 +1437,22 @@
         updateProgress(stutterRateMin, stutterRateMax, stutterRateProgress);
       });
 
-      // Event Listener für Stotter-Wahrscheinlichkeit
-      stutterProbMin.addEventListener('input', function() {
+      // Event Listener für Antwortzeit
+      responseTimeMin.addEventListener('input', function() {
         let min = parseFloat(this.value);
-        let max = parseFloat(stutterProbMax.value);
+        let max = parseFloat(responseTimeMax.value);
         
         if (min > max) {
           this.value = max;
           min = max;
         }
         
-        stutterProbMinValue.textContent = `Von: ${min.toFixed(2)}`;
-        updateProgress(stutterProbMin, stutterProbMax, stutterProbProgress);
+        responseTimeMinValue.textContent = `Von: ${min.toFixed(1)}s`;
+        updateProgress(responseTimeMin, responseTimeMax, responseTimeProgress);
       });
 
-      stutterProbMax.addEventListener('input', function() {
-        let min = parseFloat(stutterProbMin.value);
+      responseTimeMax.addEventListener('input', function() {
+        let min = parseFloat(responseTimeMin.value);
         let max = parseFloat(this.value);
         
         if (max < min) {
@@ -1169,24 +1460,24 @@
           max = min;
         }
         
-        stutterProbMaxValue.textContent = `Bis: ${max.toFixed(2)}`;
-        updateProgress(stutterProbMin, stutterProbMax, stutterProbProgress);
+        responseTimeMaxValue.textContent = `Bis: ${max.toFixed(1)}s`;
+        updateProgress(responseTimeMin, responseTimeMax, responseTimeProgress);
       });
 
       // Initiale Progress-Balken setzen
       updateProgress(stutterRateMin, stutterRateMax, stutterRateProgress);
-      updateProgress(stutterProbMin, stutterProbMax, stutterProbProgress);
+      updateProgress(responseTimeMin, responseTimeMax, responseTimeProgress);
     }
 
     // Filter anwenden
     function applyFilters() {
       currentFilters = {
         model: document.getElementById('filter-model').value,
-        quantization: document.getElementById('filter-quantization').value,
+        quality: document.getElementById('filter-quality').value,
         stutterRateMin: parseFloat(document.getElementById('filter-stutter-rate-min').value),
         stutterRateMax: parseFloat(document.getElementById('filter-stutter-rate-max').value),
-        stutterProbMin: parseFloat(document.getElementById('filter-stutter-prob-min').value),
-        stutterProbMax: parseFloat(document.getElementById('filter-stutter-prob-max').value),
+        responseTimeMin: parseFloat(document.getElementById('filter-response-time-min').value),
+        responseTimeMax: parseFloat(document.getElementById('filter-response-time-max').value),
         hasNotes: document.getElementById('filter-notes').checked
       };
 
@@ -1207,15 +1498,19 @@
           shouldShow = false;
         }
 
-        // Quantisierungs-Filter
-        if (currentFilters.quantization) {
-          const quantValue = conversation.quantization_used.toString();
-          if (quantValue !== currentFilters.quantization) {
+        // Qualitäts-Filter
+        if (currentFilters.quality) {
+          const overallQuality = conversation.evaluation_metrics?.overall_conversation_quality || 0;
+          if (currentFilters.quality === 'high' && overallQuality <= 0.7) {
+            shouldShow = false;
+          } else if (currentFilters.quality === 'medium' && (overallQuality > 0.7 || overallQuality < 0.4)) {
+            shouldShow = false;
+          } else if (currentFilters.quality === 'low' && overallQuality >= 0.4) {
             shouldShow = false;
           }
         }
 
-        // Stotterrate Filter (Von-Bis Bereich)
+        // Stotterrate Filter
         if (currentFilters.stutterRateMin !== undefined && 
             conversation.stutter_statistics.stutter_rate < currentFilters.stutterRateMin) {
           shouldShow = false;
@@ -1225,14 +1520,17 @@
           shouldShow = false;
         }
 
-        // Stotter-Wahrscheinlichkeit Filter (Von-Bis Bereich)
-        if (currentFilters.stutterProbMin !== undefined && 
-            conversation.parameters.stutter_probability < currentFilters.stutterProbMin) {
-          shouldShow = false;
-        }
-        if (currentFilters.stutterProbMax !== undefined && 
-            conversation.parameters.stutter_probability > currentFilters.stutterProbMax) {
-          shouldShow = false;
+        // Antwortzeit Filter (basierend auf durchschnittlicher Antwortzeit)
+        if (currentFilters.responseTimeMin !== undefined || currentFilters.responseTimeMax !== undefined) {
+          const avgResponseTime = conversation.conversation_metrics.response_times ? 
+            conversation.conversation_metrics.response_times.reduce((a, b) => a + b, 0) / conversation.conversation_metrics.response_times.length : 0;
+          
+          if (currentFilters.responseTimeMin !== undefined && avgResponseTime < currentFilters.responseTimeMin) {
+            shouldShow = false;
+          }
+          if (currentFilters.responseTimeMax !== undefined && avgResponseTime > currentFilters.responseTimeMax) {
+            shouldShow = false;
+          }
         }
 
         // Notizen-Filter
@@ -1241,6 +1539,18 @@
           if (!note || !note.trim()) {
             shouldShow = false;
           }
+        }
+
+        // Ansicht-Filter (Favoriten/Archiv)
+        const favorites = loadFavorites();
+        const archived = loadArchived();
+        
+        if (currentView === 'favorites' && !favorites[conversation.timestamp]) {
+          shouldShow = false;
+        }
+        
+        if (currentView === 'archived' && !archived[conversation.timestamp]) {
+          shouldShow = false;
         }
 
         // Kachel anzeigen/verstecken
@@ -1273,24 +1583,38 @@
     // Filter zurücksetzen
     function resetFilters() {
       document.getElementById('filter-model').value = '';
-      document.getElementById('filter-quantization').value = '';
+      document.getElementById('filter-quality').value = '';
       document.getElementById('filter-notes').checked = false;
       
       // Slider zurücksetzen
       document.getElementById('filter-stutter-rate-min').value = 0;
       document.getElementById('filter-stutter-rate-max').value = 100;
-      document.getElementById('filter-stutter-prob-min').value = 0;
-      document.getElementById('filter-stutter-prob-max').value = 1;
+      document.getElementById('filter-response-time-min').value = 0;
+      document.getElementById('filter-response-time-max').value = 10;
       
       document.getElementById('stutter-rate-min-value').textContent = 'Von: 0%';
       document.getElementById('stutter-rate-max-value').textContent = 'Bis: 100%';
-      document.getElementById('stutter-prob-min-value').textContent = 'Von: 0';
-      document.getElementById('stutter-prob-max-value').textContent = 'Bis: 1.0';
+      document.getElementById('response-time-min-value').textContent = 'Von: 0s';
+      document.getElementById('response-time-max-value').textContent = 'Bis: 10s';
       
       // Progress-Balken zurücksetzen
       setupDualRangeSliders();
       
       currentFilters = {};
+      filterConversations();
+    }
+
+    // Ansicht wechseln
+    function setView(view) {
+      currentView = view;
+      
+      // Aktiviere den entsprechenden Button
+      document.querySelectorAll('.view-button').forEach(button => {
+        button.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      // Filter anwenden, um die Ansicht zu aktualisieren
       filterConversations();
     }
 
@@ -1313,13 +1637,27 @@
           minute: '2-digit'
         });
 
-        // Prompts für die Vorschau vorbereiten
-        const stutterPrompt = conversation.ai_behavior_commands.stutter_ai_system_prompt;
-        const normalPrompt = conversation.ai_behavior_commands.normal_ai_system_prompt;
+        // Evaluationsmetriken
+        const evalMetrics = conversation.evaluation_metrics || {};
+        const overallQuality = evalMetrics.overall_conversation_quality || 0;
+        const contextRelevance = evalMetrics.average_context_relevance || 0;
+        const roleConsistency = evalMetrics.average_role_consistency || 0;
         
         // Notiz für diese Konversation laden
         const note = loadNote(conversation.timestamp);
         const hasNote = note && note.trim();
+        
+        // Favoriten-Status laden
+        const favorites = loadFavorites();
+        const isFavorite = favorites[conversation.timestamp];
+        
+        // Archiv-Status laden
+        const archived = loadArchived();
+        const isArchived = archived[conversation.timestamp];
+        
+        // Kachel-Klassen basierend auf Status setzen
+        if (isFavorite) tile.classList.add('favorite');
+        if (isArchived) tile.classList.add('archived');
         
         tile.innerHTML = `
           ${hasNote ? '<div class="note-indicator" title="Hat Notiz">📝</div>' : ''}
@@ -1329,9 +1667,6 @@
           </p>
           <p class="tile-info">
             <strong>Modell:</strong> ${conversation.model_used}
-          </p>
-          <p class="tile-info">
-            <strong>Quantisierung:</strong> ${conversation.quantization_used ? 'Aktiviert' : 'Deaktiviert'}
           </p>
           <p class="tile-info">
             <strong>Stotter-Wahrscheinlichkeit:</strong> ${conversation.parameters.stutter_probability}
@@ -1346,38 +1681,42 @@
               <div class="tile-stat-value">${conversation.conversation_metrics.total_messages}</div>
               <div class="tile-stat-label">Nachrichten</div>
             </div>
+            <div class="tile-stat">
+              <div class="tile-stat-value">${overallQuality.toFixed(2)}</div>
+              <div class="tile-stat-label">Qualität</div>
+            </div>
           </div>
           
           <div class="prompts-preview">
             <div class="prompt-item">
               <div class="prompt-type">Stotter-AI Prompt</div>
-              <div class="prompt-text">${stutterPrompt}</div>
+              <div class="prompt-text">${conversation.ai_behavior_commands.stutter_ai_system_prompt}</div>
             </div>
             <div class="prompt-item">
               <div class="prompt-type">Normale AI Prompt</div>
-              <div class="prompt-text">${normalPrompt}</div>
+              <div class="prompt-text">${conversation.ai_behavior_commands.normal_ai_system_prompt}</div>
             </div>
           </div>
           
           <div class="note-preview ${hasNote ? 'has-note' : ''}">
             ${hasNote ? (note.length > 100 ? note.substring(0, 100) + '...' : note) : 'Klicken um Notiz hinzuzufügen...'}
           </div>
+          
+          <div class="tile-actions">
+            <button class="action-button favorite-button ${isFavorite ? 'active' : ''}" 
+                    onclick="event.stopPropagation(); toggleFavorite('${conversation.timestamp}')">
+              ${isFavorite ? '★' : '☆'}
+            </button>
+            <button class="action-button archive-button ${isArchived ? 'active' : ''}" 
+                    onclick="event.stopPropagation(); toggleArchive('${conversation.timestamp}')">
+              ${isArchived ? '📁' : '📂'}
+            </button>
+          </div>
         `;
         
         tile.addEventListener('click', () => toggleConversationDetails(index));
         grid.appendChild(tile);
       });
-    }
-
-    // Prüfen, ob es sich um einen neuen Eintrag handelt (basierend auf verfügbaren Verarbeitungsschritten)
-    function isNewEntry(conversation) {
-      // Wenn after_speaker_removal oder after_sentence_limiting fehlen, ist es ein neuer Eintrag
-      const firstMessage = conversation.conversation_data[0];
-      if (firstMessage && firstMessage.filter_processing_steps) {
-        const steps = firstMessage.filter_processing_steps;
-        return !steps.after_speaker_removal && !steps.after_sentence_limiting;
-      }
-      return false;
     }
 
     // Evaluation-Metriken Sektion erstellen
@@ -1401,38 +1740,140 @@
             <div class="evaluation-label">Role Consistency</div>
             <div class="evaluation-description">Durchschnittliche Rollen-Treue</div>
           </div>
+          <div class="evaluation-card overall">
+            <div class="evaluation-value">${evaluationMetrics.overall_conversation_quality?.toFixed(3) || 'N/A'}</div>
+            <div class="evaluation-label">Gesamtqualität</div>
+            <div class="evaluation-description">Durchschnittliche Gesprächsqualität</div>
+          </div>
         </div>
       `;
 
       // Einzelne Nachrichten mit ihren Metriken
       let messagesHTML = '';
       
-      conversation.conversation_data.forEach((message, msgIndex) => {
-        const metrics = message.evaluation_metrics;
-        if (metrics) {
-          messagesHTML += `
-            <div class="evaluation-message">
-              <div class="evaluation-message-header">
-                <div class="evaluation-message-speaker">
-                  Runde ${message.round} - ${message.speaker} (${message.ai_type})
+      if (conversation.conversation_data && conversation.conversation_data.length > 0) {
+        conversation.conversation_data.forEach((message, msgIndex) => {
+          const metrics = message.evaluation_metrics;
+          if (metrics) {
+            messagesHTML += `
+              <div class="evaluation-message">
+                <div class="evaluation-message-header">
+                  <div class="evaluation-message-speaker">
+                    Runde ${message.round || msgIndex + 1} - ${message.speaker || 'Unbekannt'}
+                  </div>
+                  <div class="evaluation-message-scores">
+                    <span class="evaluation-score context">Context: ${metrics.context_relevance?.toFixed(3) || 'N/A'}</span>
+                    <span class="evaluation-score role">Role: ${metrics.role_consistency?.toFixed(3) || 'N/A'}</span>
+                    <span class="evaluation-score overall">Gesamt: ${metrics.overall_score?.toFixed(3) || 'N/A'}</span>
+                  </div>
                 </div>
-                <div class="evaluation-message-scores">
-                  <span class="evaluation-score context">Context: ${metrics.context_relevance?.toFixed(3) || 'N/A'}</span>
-                  <span class="evaluation-score role">Role: ${metrics.role_consistency?.toFixed(3) || 'N/A'}</span>
+                <div class="evaluation-message-content">
+                  <strong>Nachricht:</strong> ${message.clean_message || message.message || 'Keine Nachricht verfügbar'}
                 </div>
               </div>
-              <div class="evaluation-message-content">
-                <strong>Nachricht:</strong> ${message.clean_message || message.message}
-              </div>
-            </div>
-          `;
-        }
-      });
+            `;
+          }
+        });
+      }
 
       return `
         ${averageHTML}
         <h4>Einzelne Nachrichten-Bewertungen:</h4>
         ${messagesHTML || '<p>Keine Einzelbewertungen verfügbar.</p>'}
+      `;
+    }
+
+    // Word Embeddings Sektion erstellen
+    function createWordEmbeddingsSection(conversation) {
+      const topWordEmbeddings = conversation.top_word_embeddings;
+      
+      if (!topWordEmbeddings || !topWordEmbeddings.top_words_analysis) {
+        return '<p>Keine Word Embedding-Analyse verfügbar.</p>';
+      }
+
+      let embeddingsHTML = '';
+      
+      topWordEmbeddings.top_words_analysis.forEach((wordAnalysis, index) => {
+        embeddingsHTML += `
+          <div class="word-embedding-item">
+            <div class="word-header">
+              <div class="word-title">${wordAnalysis.word}</div>
+              <div class="word-count">${wordAnalysis.count}×</div>
+            </div>
+            <div class="similar-words">
+              ${wordAnalysis.top_similar_words.map(similar => `
+                <div class="similar-word">
+                  <span class="word">${similar.word}</span>
+                  <span class="similarity">(${similar.similarity})</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      });
+
+      return `
+        <div class="embedding-analysis">
+          <h4>Top ${topWordEmbeddings.total_words_analyzed} Wörter - Ähnlichkeitsanalyse</h4>
+          ${embeddingsHTML}
+        </div>
+      `;
+    }
+
+    // Vocabulary Statistics Sektion erstellen
+    function createVocabularyStatsSection(conversation) {
+      const vocabulary = conversation.complete_vocabulary;
+      
+      if (!vocabulary) {
+        return '<p>Keine Vokabular-Statistiken verfügbar.</p>';
+      }
+
+      const statsHTML = `
+        <div class="vocabulary-grid">
+          <div class="vocabulary-card">
+            <div class="vocabulary-value">${vocabulary.total_unique_words || 0}</div>
+            <div class="vocabulary-label">Einzigartige Wörter</div>
+          </div>
+          <div class="vocabulary-card">
+            <div class="vocabulary-value">${vocabulary.total_words || 0}</div>
+            <div class="vocabulary-label">Gesamtwörter</div>
+          </div>
+          <div class="vocabulary-card">
+            <div class="vocabulary-value">${Object.keys(vocabulary.by_speaker?.baecker || {}).length || 0}</div>
+            <div class="vocabulary-label">Bäcker-Wörter</div>
+          </div>
+          <div class="vocabulary-card">
+            <div class="vocabulary-value">${Object.keys(vocabulary.by_speaker?.kunde || {}).length || 0}</div>
+            <div class="vocabulary-label">Kunden-Wörter</div>
+          </div>
+        </div>
+      `;
+
+      // Top Wörter anzeigen
+      let topWordsHTML = '';
+      if (vocabulary.all_words) {
+        const topWords = Object.entries(vocabulary.all_words)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 10);
+        
+        topWordsHTML = `
+          <h4>Top 10 häufigste Wörter:</h4>
+          <div class="similar-words">
+            ${topWords.map(([word, count]) => `
+              <div class="similar-word">
+                <span class="word">${word}</span>
+                <span class="similarity">(${count}×)</span>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      return `
+        <div class="vocabulary-stats">
+          ${statsHTML}
+          ${topWordsHTML}
+        </div>
       `;
     }
 
@@ -1464,7 +1905,6 @@
       activeConversationIndex = index;
       const conversation = conversationData[index];
       const tile = document.querySelector(`.conversation-tile[data-index="${index}"]`);
-      const isNew = isNewEntry(conversation);
       
       // Kachel als aktiv markieren
       tile.classList.add('active');
@@ -1486,6 +1926,14 @@
       // Aktuelle Notiz laden
       const currentNote = loadNote(conversation.timestamp);
       
+      // Favoriten-Status laden
+      const favorites = loadFavorites();
+      const isFavorite = favorites[conversation.timestamp];
+      
+      // Archiv-Status laden
+      const archived = loadArchived();
+      const isArchived = archived[conversation.timestamp];
+      
       // Statistiken-Karten erstellen
       const statsHTML = `
         <div class="stats-grid">
@@ -1502,142 +1950,62 @@
             <div class="stat-label">Nachrichten</div>
           </div>
           <div class="stat-card">
-            <div class="stat-value">${conversation.conversation_metrics.average_response_time ? conversation.conversation_metrics.average_response_time.toFixed(2) + 's' : 'N/A'}</div>
-            <div class="stat-label">Durchschn. Antwortzeit</div>
+            <div class="stat-value">${conversation.conversation_metrics.conversation_duration || 'N/A'}s</div>
+            <div class="stat-label">Gesprächsdauer</div>
           </div>
         </div>
       `;
       
-      // Gesprächsblöcke erstellen - unterschiedlich für alte und neue Einträge
+      // Gesprächsblöcke erstellen
       let conversationHTML = '';
-      conversation.conversation_data.forEach(c => {
-        let stutterDetailsHTML = '';
-        if (c.stutter_details && c.stutter_details.length > 0) {
-          stutterDetailsHTML = `
-            <div class="stutter-details">
-              <strong>Stotterdetails:</strong>
-              ${c.stutter_details.map(detail => 
-                `<div class="stutter-detail-item">
-                  <strong>"${detail.original_word}"</strong> → "${detail.stuttered_word}" (${detail.type})
-                </div>`
-              ).join('')}
-            </div>
-          `;
-        }
-
-        // Verarbeitungsschritte anzeigen - unterschiedlich für alte und neue Einträge
-        let processingStepsHTML = '';
-        if (c.filter_processing_steps) {
-          const steps = c.filter_processing_steps;
-          
-          if (isNew) {
-            // NEUE EINTRÄGE: Nur reduzierte Schritte anzeigen
-            processingStepsHTML = `
-              <div class="processing-steps">
-                <h4>Text-Verarbeitungsschritte:</h4>
-                ${steps.raw_response ? `
-                <div class="processing-step">
-                  <div class="processing-step-title">1. Roh-Antwort (vom Modell):</div>
-                  <div class="processing-step-content">${steps.raw_response}</div>
-                </div>
-                ` : ''}
-                ${steps.after_basic_cleaning ? `
-                <div class="processing-step">
-                  <div class="processing-step-title">2. Nach grundlegender Bereinigung:</div>
-                  <div class="processing-step-content">${steps.after_basic_cleaning}</div>
-                </div>
-                ` : ''}
-                ${steps.after_word_filtering ? `
-                <div class="processing-step">
-                  <div class="processing-step-title">3. Nach Wort-Filterung (final):</div>
-                  <div class="processing-step-content">${steps.after_word_filtering}</div>
-                </div>
-                ` : ''}
-              </div>
-            `;
-          } else {
-            // ALTE EINTRÄGE: Alle Schritte anzeigen
-            processingStepsHTML = `
-              <div class="processing-steps">
-                <h4>Text-Verarbeitungsschritte:</h4>
-                <div class="processing-step">
-                  <div class="processing-step-title">1. Roh-Antwort (vom Modell):</div>
-                  <div class="processing-step-content">${steps.raw_response || 'Nicht verfügbar'}</div>
-                </div>
-                <div class="processing-step">
-                  <div class="processing-step-title">2. Nach grundlegender Bereinigung:</div>
-                  <div class="processing-step-content">${steps.after_basic_cleaning || 'Nicht verfügbar'}</div>
-                </div>
-                <div class="processing-step">
-                  <div class="processing-step-title">3. Nach Entfernung von Sprecher-Labels:</div>
-                  <div class="processing-step-content">${steps.after_speaker_removal || 'Nicht verfügbar'}</div>
-                </div>
-                <div class="processing-step">
-                  <div class="processing-step-title">4. Nach Satz-Begrenzung:</div>
-                  <div class="processing-step-content">${steps.after_sentence_limiting || 'Nicht verfügbar'}</div>
-                </div>
-                ${steps.after_repetition_removal ? `
-                <div class="processing-step">
-                  <div class="processing-step-title">5. Nach Entfernung repetitiver Muster:</div>
-                  <div class="processing-step-content">${steps.after_repetition_removal}</div>
-                </div>
-                ` : ''}
-                <div class="processing-step">
-                  <div class="processing-step-title">${steps.after_repetition_removal ? '6.' : '5.'} Nach Wort-Filterung (final):</div>
-                  <div class="processing-step-content">${steps.after_word_filtering || 'Nicht verfügbar'}</div>
-                </div>
+      if (conversation.conversation_data && conversation.conversation_data.length > 0) {
+        conversation.conversation_data.forEach((c, msgIndex) => {
+          let stutterDetailsHTML = '';
+          if (c.stutter_details && c.stutter_details.length > 0) {
+            stutterDetailsHTML = `
+              <div class="stutter-details">
+                <strong>Stotterdetails:</strong>
+                ${c.stutter_details.map(detail => 
+                  `<div class="stutter-detail-item">
+                    <strong>"${detail.original_word}"</strong> → "${detail.stuttered_word}" (${detail.type})
+                  </div>`
+                ).join('')}
               </div>
             `;
           }
-        }
 
-        // Erstelle Vergleich zwischen Original und gefilterter Nachricht
-        let messageComparisonHTML = '';
-        if (c.clean_message && c.message !== c.clean_message) {
-          messageComparisonHTML = `
-            <div class="message-comparison">
-              <div class="message-content original-message">
-                <strong>Original (vor Filterung):</strong> ${c.message}
+          // Evaluation Scores für diese Nachricht
+          let evaluationScoresHTML = '';
+          if (c.evaluation_metrics) {
+            const metrics = c.evaluation_metrics;
+            evaluationScoresHTML = `
+              <div class="evaluation-message-scores" style="margin-top: 0.5rem;">
+                <span class="evaluation-score context">Context: ${metrics.context_relevance?.toFixed(3) || 'N/A'}</span>
+                <span class="evaluation-score role">Role: ${metrics.role_consistency?.toFixed(3) || 'N/A'}</span>
+                <span class="evaluation-score overall">Gesamt: ${metrics.overall_score?.toFixed(3) || 'N/A'}</span>
               </div>
-              <div class="message-content filtered-message">
-                <strong>Nach Filterung:</strong> ${c.clean_message}
+            `;
+          }
+          
+          conversationHTML += `
+            <div class="conversation-block">
+              <p class="round">Runde ${c.round || msgIndex + 1}</p>
+              <p class="speaker">
+                <span class="stutter-indicator ${c.speaker === 'stuttering_ai' ? 'stutter-true' : 'stutter-false'}"></span>
+                ${c.speaker === 'normal_ai' ? 'Bäcker' : 'Kunde'}
+              </p>
+              <div class="message-content">
+                <strong>Nachricht:</strong> ${c.clean_message || c.message}
               </div>
+              ${evaluationScoresHTML}
+              ${stutterDetailsHTML}
+              <p><strong>Antwortzeit:</strong> ${c.response_time_seconds ? c.response_time_seconds.toFixed(2) + 's' : 'N/A'}</p>
             </div>
           `;
-        } else {
-          messageComparisonHTML = `
-            <div class="message-content">
-              <strong>Nachricht:</strong> ${c.message}
-            </div>
-          `;
-        }
-        
-        conversationHTML += `
-          <div class="conversation-block">
-            <p class="round">Runde ${c.round}</p>
-            <p class="speaker">
-              <span class="stutter-indicator ${c.is_stuttered ? 'stutter-true' : 'stutter-false'}"></span>
-              ${c.speaker} (${c.ai_type})
-            </p>
-            ${messageComparisonHTML}
-            ${processingStepsHTML}
-            ${stutterDetailsHTML}
-            <p><strong>Antwortzeit:</strong> ${c.response_time_seconds ? c.response_time_seconds.toFixed(2) + 's' : 'N/A'}</p>
-            ${!isNew ? `
-            <details>
-              <summary>Vollständiger Prompt</summary>
-              <pre>${c.full_prompt_used}</pre>
-            </details>
-            ${c.context_messages && c.context_messages.length > 0 ? `
-            <details>
-              <summary>Kontext-Nachrichten (${c.context_messages.length})</summary>
-              <pre>${JSON.stringify(c.context_messages, null, 2)}</pre>
-            </details>
-            ` : ''}
-            ` : ''}
-          </div>
-        `;
-      });
+        });
+      } else {
+        conversationHTML = '<p>Keine Konversationsdaten verfügbar.</p>';
+      }
 
       // AI Behavior Commands anzeigen
       const aiCommandsHTML = `
@@ -1676,6 +2044,32 @@
         </div>
       `;
 
+      // Word Embeddings Sektion
+      const wordEmbeddingsHTML = `
+        <div class="collapsible-section">
+          <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <h3>Word Embeddings Analyse</h3>
+            <span class="collapsible-icon">▼</span>
+          </div>
+          <div class="collapsible-content">
+            ${createWordEmbeddingsSection(conversation)}
+          </div>
+        </div>
+      `;
+
+      // Vocabulary Statistics Sektion
+      const vocabularyStatsHTML = `
+        <div class="collapsible-section">
+          <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <h3>Vokabular-Statistiken</h3>
+            <span class="collapsible-icon">▼</span>
+          </div>
+          <div class="collapsible-content">
+            ${createVocabularyStatsSection(conversation)}
+          </div>
+        </div>
+      `;
+
       // Notiz-Sektion
       const noteSectionHTML = `
         <div class="collapsible-section">
@@ -1698,38 +2092,39 @@
         </div>
       `;
 
-      // Unterschiedliche Inhalte für alte und neue Einträge
-      let additionalSections = '';
-      
-      if (!isNew) {
-        // ALTE EINTRÄGE: Alle Sektionen anzeigen
-        additionalSections = `
-          <div class="collapsible-section">
-            <div class="collapsible-header" onclick="toggleCollapsible(this)">
-              <h3>Systeminformationen</h3>
-              <span class="collapsible-icon">▼</span>
-            </div>
-            <div class="collapsible-content">
-              <pre>${JSON.stringify(conversation.system_info, null, 2)}</pre>
-            </div>
+      // Favoriten und Archiv Aktionen
+      const favoriteArchiveHTML = `
+        <div class="collapsible-section">
+          <div class="collapsible-header" onclick="toggleCollapsible(this)">
+            <h3>Favoriten & Archiv</h3>
+            <span class="collapsible-icon">▼</span>
           </div>
-          
-          <div class="collapsible-section">
-            <div class="collapsible-header" onclick="toggleCollapsible(this)">
-              <h3>Gesprächsmetriken</h3>
-              <span class="collapsible-icon">▼</span>
+          <div class="collapsible-content">
+            <div style="display: flex; gap: 1rem; align-items: center;">
+              <button class="action-button favorite-button ${isFavorite ? 'active' : ''}" 
+                      onclick="toggleFavorite('${conversation.timestamp}'); updateDetailsActions('${conversation.timestamp}')" 
+                      style="font-size: 1.5rem; padding: 0.5rem 1rem;">
+                ${isFavorite ? '★ Favorit' : '☆ Als Favorit markieren'}
+              </button>
+              <button class="action-button archive-button ${isArchived ? 'active' : ''}" 
+                      onclick="toggleArchive('${conversation.timestamp}'); updateDetailsActions('${conversation.timestamp}')" 
+                      style="font-size: 1.5rem; padding: 0.5rem 1rem;">
+                ${isArchived ? '📁 Aus Archiv entfernen' : '📂 Archivieren'}
+              </button>
             </div>
-            <div class="collapsible-content">
-              <pre>${JSON.stringify(conversation.conversation_metrics, null, 2)}</pre>
-            </div>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-light);">
+              ${isFavorite ? '✓ Dieses Gespräch ist als Favorit markiert' : ''}
+              ${isArchived ? '✓ Dieses Gespräch ist archiviert' : ''}
+            </p>
           </div>
-        `;
-      }
+        </div>
+      `;
       
       detailsContainer.innerHTML = `
         <button class="back-button" onclick="closeConversationDetails()">Details schließen</button>
-        <h2>Gespräch ${index + 1} - ${formattedDate} ${isNew ? '<span style="color: var(--secondary-color); font-size: 0.8rem;">(Neuer Eintrag)</span>' : ''}</h2>
+        <h2>Gespräch ${index + 1} - ${formattedDate}</h2>
         
+        ${favoriteArchiveHTML}
         ${noteSectionHTML}
         
         <div class="collapsible-section">
@@ -1741,10 +2136,9 @@
             <pre>
 Modell: ${conversation.model_used}
 Zeitstempel: ${formattedDate}
-Ladezeit des Modells (s): ${conversation.model_load_time_seconds}
-Quantisierung verwendet: ${conversation.quantization_used}
-${!isNew ? `Quantisierungskonfiguration: ${conversation.quantization_config}` : ''}
-Kontext-Fenster: ${conversation.parameters.context_window} Nachrichten
+Ladezeit des Modells (s): ${conversation.model_load_time_seconds || 'N/A'}
+Konversations-ID: ${conversation.conversation_id || 'N/A'}
+Kontext-Fenster: ${conversation.parameters.context_window || 'N/A'} Nachrichten
             </pre>
           </div>
         </div>
@@ -1762,8 +2156,8 @@ Kontext-Fenster: ${conversation.parameters.context_window} Nachrichten
         </div>
         
         ${evaluationMetricsHTML}
-        
-        ${additionalSections}
+        ${wordEmbeddingsHTML}
+        ${vocabularyStatsHTML}
         
         <div class="collapsible-section">
           <div class="collapsible-header" onclick="toggleCollapsible(this)">
@@ -1781,10 +2175,8 @@ Stotterrate: ${conversation.stutter_statistics.stutter_rate}%
             <h4>Stottertypen:</h4>
             <pre>${JSON.stringify(conversation.stutter_statistics.stutter_types, null, 2)}</pre>
             
-            ${!isNew ? `
             <h4>Stottermuster:</h4>
             <pre>${conversation.stutter_statistics.stutter_patterns ? conversation.stutter_statistics.stutter_patterns.join(', ') : 'Keine Muster verfügbar'}</pre>
-            ` : ''}
           </div>
         </div>
         
@@ -1801,14 +2193,28 @@ Stotterrate: ${conversation.stutter_statistics.stutter_rate}%
       
       // Details-Container direkt nach der angeklickten Kachel einfügen
       tile.after(detailsContainer);
+    }
+
+    // Favoriten/Archiv-Aktionen in den Details aktualisieren
+    function updateDetailsActions(conversationId) {
+      const favorites = loadFavorites();
+      const archived = loadArchived();
       
-      // Stelle sicher, dass die anderen Kacheln sichtbar bleiben
-      const allTiles = document.querySelectorAll('.conversation-tile');
-      allTiles.forEach(t => {
-        if (t !== tile) {
-          t.style.display = 'block'; // Sicherstellen, dass andere Kacheln angezeigt werden
-        }
-      });
+      const favoriteButton = document.querySelector(`.conversation-details-container[data-index="${activeConversationIndex}"] .favorite-button`);
+      const archiveButton = document.querySelector(`.conversation-details-container[data-index="${activeConversationIndex}"] .archive-button`);
+      
+      if (favoriteButton) {
+        favoriteButton.classList.toggle('active', favorites[conversationId]);
+        favoriteButton.innerHTML = favorites[conversationId] ? '★ Favorit' : '☆ Als Favorit markieren';
+      }
+      
+      if (archiveButton) {
+        archiveButton.classList.toggle('active', archived[conversationId]);
+        archiveButton.innerHTML = archived[conversationId] ? '📁 Aus Archiv entfernen' : '📂 Archivieren';
+      }
+      
+      // Aktualisiere auch die Kachel
+      updateTileAppearance(conversationId);
     }
 
     // Auf-/Zuklappen-Funktion für die Sektionen
